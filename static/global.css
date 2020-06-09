@@ -1,0 +1,41 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15em;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 1.15em;
+}
+
+th {
+    color: white;
+    background: black;
+    padding: 5px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 7px;
+    text-align: center;
+    width: 120px;
+}
+
+.week {
+    color: white;
+    background: rgb(39, 39, 39);
+    font-weight: bold;
+}
+
+.pomos {
+    background: rgb(172, 172, 172);
+    font-weight: bold;
+}
+
+.pomos10 {
+    background: rgb(172, 172, 172);
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(255, 220, 21);
+}

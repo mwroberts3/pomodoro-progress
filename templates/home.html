@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="static/global.css">
+
+<center><h1>Pomodoro Progress!</h1></center>
+
+<body>
+<center>
+   <form>
+        Date:
+        <input type="text">
+        Pomodoros:
+        <input type="text">
+        Task(s):
+        <input type="text">
+        <input type="submit">
+    </form>
+    <hr>
+<table id="pomodoro_data" style="display: inline-block;">
+    <th>Date</th>
+    <th>Pomodoros</th>
+    <th>Task(s)</th>
+    <tr>
+        <td class="week">#{{ week_count + 1 }}</td>
+        <td class="week">Total: {{ tomato_count }}</td>
+        <td class="week">Avg: {{ tomato_count/day_count }}</td>
+    </tr>
+    {% for row in full_chart|reverse %}
+        <tr>
+            {% if row['date']|float >= 1 %}
+                <td class="week">#{{ row['date'] }}</td>
+                <td class="week">Total: {{ row['tomatoes'] }}</td>
+                <td class="week">Avg: {{ row['task'] }}</td>
+            {% else %}
+                {% if row['tomatoes']|int >= 10 %}    
+                    <td>{{ row['date'] }}</td>
+                    <td class="pomos10">{{ row['tomatoes'] }}</td>
+                    <td>{{ row['task'] }}</td>
+                {% else %}
+                    <td>{{ row['date'] }}</td>
+                    <td class="pomos">{{ row['tomatoes'] }}</td>
+                    <td>{{ row['task'] }}</td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+</center>
+</body>
