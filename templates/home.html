@@ -1,44 +1,48 @@
 <link rel="stylesheet" type="text/css" href="static/global.css">
 
-<center><h1>Pomodoro Progress!</h1></center>
+<a href="/">logout</a>
+<center><h1>Pomo Progress!</h1></center>
 
 <body>
 <center>
-   <form>
-        Date:
-        <input type="text">
+    <form action="/home" method="post">
         Pomodoros:
-        <input type="text">
+        <input name="tomatoes" placeholder="pomodoro count" type="number" required>
         Task:
-        <input type="text">
+        <input name="task" placeholder="primary task" type="text">
         Notes:
-        <input type="text">
+        <input name="notes" placeholder="notes or secondary tasks" type="text">
         <input type="submit">
     </form>
     <hr>
 <table id="pomodoro_data" style="display: inline-block;">
-    <th>Date</th>
+    <th>Date of Entry</th>
     <th>Pomodoros</th>
     <th>Task(s)</th>
     <tr>
-        <td class="week">#{{ week_count + 1 }}</td>
-        <td class="week">Total: {{ tomato_count }}</td>
-        <td class="week">Avg: {{ tomato_count/day_count }}</td>
+        {% if day_count > 0 %}
+            <td class="week">#{{ week_count + 1 }}</td>
+            <td class="week">Total: {{ tomato_total }}</td>
+            <td class="week">Avg: {{ tomato_total/day_count }}</td>
+        {% endif %}
+        {% if day_count == 0 %}
+            <!--if it has been exactly a week, do not display anything for upcoming week-->
+        {% endif %}
     </tr>
     {% for row in full_chart|reverse %}
         <tr>
             {% if row['date']|float >= 1 %}
                 <td class="week">#{{ row['date'] }}</td>
-                <td class="week">Total: {{ row['tomatoes'] }}</td>
+                <td class="week">Total: {{ row['tomato_count'] }}</td>
                 <td class="week">Avg: {{ row['task'] }}</td>
             {% else %}
-                {% if row['tomatoes']|int >= 10 %}    
+                {% if row['tomato_count']|int >= 10 %}    
                     <td>{{ row['date'] }}</td>
-                    <td class="pomos10">{{ row['tomatoes'] }}</td>
+                    <td class="pomos10">{{ row['tomato_count'] }}</td>
                     <td>{{ row['task'] }}</td>
                 {% else %}
                     <td>{{ row['date'] }}</td>
-                    <td class="pomos">{{ row['tomatoes'] }}</td>
+                    <td class="pomos">{{ row['tomato_count'] }}</td>
                     <td>{{ row['task'] }}</td>
                 {% endif %}
             {% endif %}

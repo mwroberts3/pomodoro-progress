@@ -1,16 +1,30 @@
-Table Name:
+<link rel="stylesheet" type="text/css" href="static/global.css">
+<center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Pomo Progress!</h1>
+    <br>
+    {% for message in get_flashed_messages() %}
+        <strong>{{ message }}</strong>
+    {% endfor %}
+    <br>
+    <br>
+    <br>
+<h2>Table Name:</h2>
 <form action="/" method="post">
     <div>
         <input autocomplete="on" name="table_name" placeholder="table name" type="text" required>
     </div>
+    <br>
     <div>
-        <input type="submit" name="load" value="load">
-    </div>
-    <div>
-        <input type="submit" name="create" value="create">
+        <input type="submit" name="load" value="load"> <input type="submit" name="create" value="create">
     </div>
 </form>
-
-
 <br>
-<a href="home">home</a>
+<br>
+<br>
+<br>
+<a href="/howtouse">How to use this site</a>
+</center>
