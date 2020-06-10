@@ -1,9 +1,12 @@
-<link rel="stylesheet" type="text/css" href="static/global.css">
+{% extends 'base.html' %}
+
+{% block title %}Pomo Progress{% endblock %}
+
+{% block main %}
 
 <a href="/">logout</a>
 <center><h1>Pomo Progress!</h1></center>
 
-<body>
 <center>
     <form action="/home" method="post">
         Pomodoros:
@@ -14,40 +17,67 @@
         <input name="notes" placeholder="notes or secondary tasks" type="text">
         <input type="submit">
     </form>
-    <hr>
-<table id="pomodoro_data" style="display: inline-block;">
-    <th>Date of Entry</th>
-    <th>Pomodoros</th>
-    <th>Task(s)</th>
-    <tr>
-        {% if day_count > 0 %}
-            <td class="week">#{{ week_count + 1 }}</td>
-            <td class="week">Total: {{ tomato_total }}</td>
-            <td class="week">Avg: {{ tomato_total/day_count }}</td>
-        {% endif %}
-        {% if day_count == 0 %}
-            <!--if it has been exactly a week, do not display anything for upcoming week-->
-        {% endif %}
-    </tr>
-    {% for row in full_chart|reverse %}
-        <tr>
-            {% if row['date']|float >= 1 %}
-                <td class="week">#{{ row['date'] }}</td>
-                <td class="week">Total: {{ row['tomato_count'] }}</td>
-                <td class="week">Avg: {{ row['task'] }}</td>
-            {% else %}
-                {% if row['tomato_count']|int >= 10 %}    
-                    <td>{{ row['date'] }}</td>
-                    <td class="pomos10">{{ row['tomato_count'] }}</td>
-                    <td>{{ row['task'] }}</td>
-                {% else %}
-                    <td>{{ row['date'] }}</td>
-                    <td class="pomos">{{ row['tomato_count'] }}</td>
-                    <td>{{ row['task'] }}</td>
-                {% endif %}
-            {% endif %}
-        </tr>
-    {% endfor %}
-</table>
 </center>
-</body>
+    <hr>
+<div class="row">
+    <div class="column left">
+            <center>
+            <u>About Table</u>
+            <br>
+            TODO
+            <br>
+            "A Programmers Progress"
+            <br>
+            Hourly Goal: 1000
+            <br>
+            Pomodoro Time: 25min
+            <br>
+            Pomodoros to Goal: 2400
+            </center>
+    </div>
+    <div class="column middle">
+        <table id="pomodoro_data" style="display: inline-block;">
+            <th>Date of Entry</th>
+            <th>Pomodoros</th>
+            <th>Task(s)</th>
+            <tr>
+                {% if day_count > 0 %}
+                    <td class="week">#{{ week_count + 1 }}</td>
+                    <td class="week">Total: {{ tomato_total }}</td>
+                    <td class="week">Avg: {{ tomato_total/day_count }}</td>
+                {% endif %}
+                {% if day_count == 0 %}
+                    <!--if it has been exactly a week, do not display anything for upcoming week-->
+                {% endif %}
+            </tr>
+            {% for row in full_chart|reverse %}
+                <tr>
+                    {% if row['date']|float >= 1 %}
+                        <td class="week">#{{ row['date'] }}</td>
+                        <td class="week">Total: {{ row['tomato_count'] }}</td>
+                        <td class="week">Avg: {{ row['task'] }}</td>
+                    {% else %}
+                        {% if row['tomato_count']|int >= 10 %}    
+                            <td>{{ row['date'] }}</td>
+                            <td class="pomos10">{{ row['tomato_count'] }}</td>
+                            <td>{{ row['task'] }}</td>
+                        {% else %}
+                            <td>{{ row['date'] }}</td>
+                            <td class="pomos">{{ row['tomato_count'] }}</td>
+                            <td>{{ row['task'] }}</td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="column right">
+        <center><u>Stats</u>
+        <br>
+    Total Pomodoros: {{ stats['total_tomatoes'] }}
+    <br>
+    Daily Average: {{ stats['daily_average']}}
+    </center>
+    </div>
+<div>
+{% endblock %}

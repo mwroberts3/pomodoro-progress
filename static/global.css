@@ -3,6 +3,38 @@ body {
     font-size: 1.15em;
 }
 
+
+/* Set additional styling options for the columns */
+.column {
+float: left;
+}
+
+/* Set width length for the left, right and middle columns */
+.left {
+width: 30%;
+margin-top: 100px;
+margin-left: 15px;
+margin-right: 10px;
+padding: 0px;
+}
+
+.middle {
+width: 40%;
+}
+
+.right {
+width: 20%;
+margin-top: 100px;
+margin-left: 40px;
+padding: 0px;
+}
+
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
 table {
     border: 1px solid black;
     border-collapse: collapse;

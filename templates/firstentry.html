@@ -1,4 +1,8 @@
-<link rel="stylesheet" type="text/css" href="static/global.css">
+{% extends 'base.html' %}
+
+{% block title %}Submit Your First Entry!{% endblock %}
+
+{% block main %}
 
 Please enter first entry:
 <form action="/firstentry" method="post">
@@ -10,3 +14,4 @@ Please enter first entry:
     <input name="notes" placeholder="notes or secondary tasks" type="text">
     <input type="submit">
 </form>
+{% endblock %}

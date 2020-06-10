@@ -4,6 +4,7 @@ from tempfile import mkdtemp
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
+from pomo_helpers import statistics
 
 app = Flask(__name__)
 
@@ -96,7 +97,7 @@ def home():
             previous_task = date_previous_data[0]['task']
             previous_notes = date_previous_data[0]['notes']
 
-            db.execute("UPDATE daily_history SET tomato_count=:tomato_count, task=:task, notes=:notes WHERE date=:date", tomato_count = previous_tomato_count + int(request.form.get("tomatoes")), task = previous_task + ", " +request.form.get("task"), notes = previous_notes + "| " +request.form.get("notes"), date=current_date)
+            db.execute("UPDATE daily_history SET tomato_count=:tomato_count, task=:task, notes=:notes WHERE table_id=:table_id AND date=:date", tomato_count = previous_tomato_count + int(request.form.get("tomatoes")), task = previous_task + ", " +request.form.get("task"), notes = previous_notes + "| " +request.form.get("notes"), table_id=session['table_id'], date=current_date)
 
             return redirect('/home')
         else:
@@ -157,8 +158,13 @@ def home():
                 for day in week:
                     full_chart.append(day)
 
-        return render_template('home.html', full_chart = full_chart, week_count = week_count, tomato_total = tomato_total, day_count = day_count)
-    # DEBUG-CODE return render_template("test.html", user_data = user_data, session_id = session['table_id'])
+            # send user_data to statistics function in stat_helpers to generate stats
+            stats = statistics(user_data)
+
+            # DEBUG-CODE return render_template("test.html", stats=stats)
+
+        return render_template('home.html', full_chart = full_chart, week_count = week_count, tomato_total = tomato_total, day_count = day_count, stats=stats)
+    
     
 @app.route('/firstentry', methods=["GET","POST"])
 def firstentry():
