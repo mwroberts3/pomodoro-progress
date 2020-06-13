@@ -3,12 +3,9 @@
 {% block title %}Pomo Progress{% endblock %}
 
 {% block main %}
-<center>
     <br>
     <br>
-    <br>
-    <br>
-    <h1>Pomo Progress!</h1>
+    <center><h1>Pomo Progress!</h1></center>
     <br>
     {% for message in get_flashed_messages() %}
         <strong>{{ message }}</strong>
@@ -16,20 +13,30 @@
     <br>
     <br>
     <br>
+    <center>
 <h2>Table Name:</h2>
 <form action="/" method="post">
     <div>
-        <input autocomplete="on" name="table_name" placeholder="table name" type="text" required>
-    </div>
-    <br>
-    <div>
-        <input type="submit" name="load" value="load"> <input type="submit" name="create" value="create">
+        <input autocomplete="on" name="table_name" placeholder="table name" type="text" required> <input type="submit" name="load" value="load">
     </div>
 </form>
+    <br>
+<form action="/" method="post">
+    <div>
+         <input type="button" value="make new table" id="new_table">
+        <div id="new_table_display"></div>
+        <script>
+            document.querySelector('#new_table').onclick = function(){
+              document.querySelector('#new_table_display').outerHTML = '<br><br><div><input autocomplete="off" name="new_table_name" placeholder="new table name" type="text"></div><br><div><input autocomplete="off" name="purpose" placeholder="purpose" type="text"></div><br><div><input autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br><div><input autocomplete="off" name="time_frame" placeholder="time frame" type="text"></div><br><div><input autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" name="create" value="create"></div>';}
+        </script>
+    </div>    
+</form>
+    </center>
+<br>
+<center>based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> developed by Francesco Cirillo</center>
 <br>
 <br>
 <br>
 <br>
-<a href="/howtouse">How to use this site</a>
-</center>
+<center><a href="/howtouse">How to use this site</a></center>
 {% endblock %}

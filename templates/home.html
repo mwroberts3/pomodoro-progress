@@ -2,11 +2,17 @@
 
 {% block title %}Pomo Progress{% endblock %}
 
+{% block header %}
+<header>
+    <!-- figure out how to make logout and logo on the same line -->
+    <a href="/">logout</a>
+    <center>
+        <h1>Pomo Progress!</h1>
+    </center>
+</header>
+{% endblock %}
+
 {% block main %}
-
-<a href="/">logout</a>
-<center><h1>Pomo Progress!</h1></center>
-
 <center>
     <form action="/home" method="post">
         Pomodoros:
@@ -36,6 +42,7 @@
             </center>
     </div>
     <div class="column middle">
+        <center>
         <table id="pomodoro_data" style="display: inline-block;">
             <th>Date of Entry</th>
             <th>Pomodoros</th>
@@ -70,13 +77,16 @@
                 </tr>
             {% endfor %}
         </table>
+        </center>
     </div>
     <div class="column right">
-        <center><u>Stats</u>
+        <center><strong><u>Stats</u></strong>
         <br>
-    Total Pomodoros: {{ stats['total_tomatoes'] }}
+    <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
     <br>
-    Daily Average: {{ stats['daily_average']}}
+    <strong>Daily Average:</strong> {{ stats['daily_average'] }}
+    <br>
+    <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
     </center>
     </div>
 <div>

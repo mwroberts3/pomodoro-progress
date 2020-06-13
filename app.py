@@ -45,7 +45,7 @@ def load():
         # if user wants to create a new table
         if request.form.get("create"):
 
-            saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("table_name"))
+            saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
 
             # checks to see if table with that name already exists in database
             if len(saved_tables) == 1:
@@ -54,10 +54,10 @@ def load():
 
             else:    
                 # inserts new table name, with automatic id into tables table
-                db.execute("INSERT INTO tables (table_name) VALUES (?)", request.form.get("table_name"))
+                db.execute("INSERT INTO tables (table_name) VALUES (?)", request.form.get("new_table_name"))
 
                 # pull up newly created table's ID and save to session list
-                saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("table_name"))
+                saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
                 session['table_id'] = saved_tables[0]['id']
 
                 return redirect('/home')
