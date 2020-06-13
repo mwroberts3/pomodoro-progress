@@ -28,17 +28,27 @@
 <div class="row">
     <div class="column left">
             <center>
-            <u>About Table</u>
+            <u><strong>About Table</strong></u>
             <br>
-            TODO
             <br>
-            "A Programmers Progress"
+            "{{ session['table_name'] }}"
             <br>
-            Hourly Goal: 1000
             <br>
-            Pomodoro Time: 25min
+            <strong>Purpose:</strong> 
             <br>
-            Pomodoros to Goal: 2400
+            {{ session['purpose'] }}
+            <br>
+            <br>
+            <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
+            <br>
+            <br>
+            <strong>Time Frame:</strong><br>{{ session['years'] }} years {{ session['months']}} months {{ session['days'] }} days
+            <br>
+            <strong>[CONVERT TO DEADLINE SYSTEM]</strong>
+            <br>
+            <br>
+            <strong>Pomodoro Time:</strong> {{ session['tomato_rate'] }} minutes
+            <br>
             </center>
     </div>
     <div class="column middle">
@@ -51,7 +61,7 @@
                 {% if day_count > 0 %}
                     <td class="week">#{{ week_count + 1 }}</td>
                     <td class="week">Total: {{ tomato_total }}</td>
-                    <td class="week">Avg: {{ tomato_total/day_count }}</td>
+                    <td class="week">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
                 {% endif %}
                 {% if day_count == 0 %}
                     <!--if it has been exactly a week, do not display anything for upcoming week-->
@@ -80,14 +90,28 @@
         </center>
     </div>
     <div class="column right">
-        <center><strong><u>Stats</u></strong>
-        <br>
-    <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
-    <br>
-    <strong>Daily Average:</strong> {{ stats['daily_average'] }}
-    <br>
-    <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
-    </center>
+        <details>
+            <summary>Stats</summary>
+            <br>
+            <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
+            <br>
+            <strong>Daily Average:</strong> {{ stats['daily_average'] }}
+            <br>
+            <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
+            <br>
+            <strong>Pace:</strong>  
+                {% if stats['pace']['rate'] >= 100 %}
+                    <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>
+                {% else %}
+                    <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>  
+                {% endif %}
+            <br>
+            <br>
+            <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
+            <br>
+            <strong>One Day High:</strong> {{ stats['one_day_high']}} pomodoros
+            </center>
+        </details>
     </div>
 <div>
 {% endblock %}

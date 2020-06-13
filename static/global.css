@@ -31,7 +31,6 @@ clear: both;
 
 table {
     width: 100%;
-    border: 1px solid black;
     border-collapse: collapse;
     font-size: 1.15em;
 }
@@ -41,6 +40,8 @@ th {
     background: black;
     padding: 5px;
     width: 33%;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 td {
@@ -50,11 +51,26 @@ td {
     width: 33%;
 }
 
+details > summary {
+    font-weight: bold;
+    text-decoration: underline;
+    margin: auto;
+    width: 80px;
+    cursor: pointer;
+}
+
+details {
+    align-content: center;
+    margin: auto;
+    width: 300px;
+    cursor: pointer;
+}
+
 .week {
     color: white;
     background: rgb(39, 39, 39);
     font-weight: bold;
-    border: none;
+    border: 1px solid black;
 }
 
 .pomos {
@@ -68,4 +84,15 @@ td {
     font-weight: bold;
     font-style: italic;
     color: rgb(255, 220, 21);    
+}
+
+.footer {
+    position: relative;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    color: black;
+    text-align: center;
+    font-size: 0.85em;
 }

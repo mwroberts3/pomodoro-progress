@@ -4,7 +4,7 @@ from tempfile import mkdtemp
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
-from pomo_helpers import statistics
+from pomo_helpers import statistics, time_frame_conversion
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # dictionary used to store the table id that user wants to use.
-session = {"table_id" : "user input"}
+session = {}
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -29,7 +29,7 @@ def load():
 
         # if user wants to load existing table
         if request.form.get("load"):
-            saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("table_name"))
+            saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("table_name"))
             
             # check to see if user input table name exists in database
             # if there is not exactly one list returned, then display error message
@@ -39,8 +39,19 @@ def load():
                    
             else:
                 session['table_id'] = saved_tables[0]['id']
+                session['table_name'] = saved_tables[0]['table_name']
+                session['purpose'] = saved_tables[0]['purpose']
+                session['hours_goal'] = saved_tables[0]['hours_goal']
+                session['time_frame'] = saved_tables[0]['time_frame']
+                session['tomato_rate'] = saved_tables[0]['tomato_rate']
+                
+                # converts the time_frame string into individual years, months and days elements
+                session.update(time_frame_conversion(session))            
+            
+                # DEBUG-CODE: return render_template("test.html", session=session, saved_tables=saved_tables)
+
                 return redirect('/home')
-                # DEBUG-CODE: return render_template("test.html", saved_tables=saved_tables, session_id = session['table_id'])
+                
         
         # if user wants to create a new table
         if request.form.get("create"):
@@ -54,11 +65,19 @@ def load():
 
             else:    
                 # inserts new table name, with automatic id into tables table
-                db.execute("INSERT INTO tables (table_name) VALUES (?)", request.form.get("new_table_name"))
+                db.execute("INSERT INTO tables (table_name, purpose, hours_goal, time_frame, tomato_rate) VALUES (?, ?, ?, ?, ?)", request.form.get("new_table_name"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
 
                 # pull up newly created table's ID and save to session list
-                saved_tables = db.execute("SELECT id FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
+                saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
                 session['table_id'] = saved_tables[0]['id']
+                session['table_name'] = saved_tables[0]['table_name']
+                session['purpose'] = saved_tables[0]['purpose']
+                session['hours_goal'] = saved_tables[0]['hours_goal']
+                session['time_frame'] = saved_tables[0]['time_frame']
+                session['tomato_rate'] = saved_tables[0]['tomato_rate']
+
+                # converts the time_frame string into individual years, months and days elements
+                session.update(time_frame_conversion(session))                 
 
                 return redirect('/home')
     else:
@@ -159,11 +178,12 @@ def home():
                     full_chart.append(day)
 
             # send user_data to statistics function in stat_helpers to generate stats
-            stats = statistics(user_data)
+            stats = statistics(user_data, session)
 
-            # DEBUG-CODE return render_template("test.html", stats=stats)
+            # DEBUG-CODE 
+            # return render_template("test.html", stats=stats)
 
-        return render_template('home.html', full_chart = full_chart, week_count = week_count, tomato_total = tomato_total, day_count = day_count, stats=stats)
+        return render_template('home.html', full_chart = full_chart, week_count = week_count, tomato_total = tomato_total, day_count = day_count, stats=stats, session=session)
     
     
 @app.route('/firstentry', methods=["GET","POST"])
