@@ -2,41 +2,40 @@
 
 {% block title %}Pomo Progress{% endblock %}
 
-{% block main %}
-    <br>
-    <br>
+{% block header %}
     <center><h1>Pomo Progress!</h1></center>
-    <br>
     {% for message in get_flashed_messages() %}
-        <strong>{{ message }}</strong>
+        <center><strong>{{ message }}</strong></center>
     {% endfor %}
-    <br>
-    <br>
-    <br>
+{% endblock %}
+
+{% block main %}
+<div class="load">    
     <center>
-<h2>Table Name:</h2>
-<form action="/" method="post">
-    <div>
-        <input autocomplete="on" name="table_name" placeholder="table name" type="text" required> <input type="submit" name="load" value="load">
-    </div>
-</form>
-    <br>
-<form action="/" method="post">
-    <div>
-         <input type="button" value="make new table" id="new_table">
-        <div id="new_table_display"></div>
-        <script>
-            document.querySelector('#new_table').onclick = function(){
-              document.querySelector('#new_table_display').outerHTML = '<br><br>Choose a name for your new table:<div><input autocomplete="off" name="new_table_name" placeholder="new table name" type="text"></div><br>What is the purpose of tracking your progress? <br>What are you trying to acheive?<div><input autocomplete="off" name="purpose" placeholder="purpose" type="text"></div><br>In how many hours do you want to acheive this goal?<div><input autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>What is the time frame of acheiving this goal?<br><em>please format correctly, for certain functions to work</em><div><input autocomplete="off" name="time_frame" placeholder="y/m/d" type="text"></div><br>What do you want to set your pomodoro timer to?<br>See "How to use this site" link below for more information<div><input autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" name="create" value="create new table"></div>';}
-        </script>
-    </div>    
-</form>
-    </center>
-<br>
-<center>based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> developed by Francesco Cirillo</center>
-<br>
-<br>
-<br>
+    <h2>Table Name:</h2>
+    <form action="/" method="post">
+        <div>
+            <input autocomplete="on" name="table_name" placeholder="table name" type="text" required> <input type="submit" name="load" value="load">
+        </div>
+    </form>
+        <br>
+    <form action="/" method="post">
+        <div>
+            <input type="button" value="make new table" id="new_table">
+            <div id="new_table_display"></div>
+            <script>
+                document.querySelector('#new_table').onclick = function(){
+                document.querySelector('#new_table_display').outerHTML = '<br><br>Choose a name for your new table:<div><input autocomplete="off" name="new_table_name" placeholder="new table name" type="text"></div><br>What is the purpose of tracking your progress? <br>What are you trying to acheive?<div><textarea name="purpose" row="4" col="50" placeholder="purpose"></textarea></div><br>In how many hours do you want to acheive this goal?<div><input autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>What is the time frame of acheiving this goal?<br><em>please format correctly, for certain functions to work</em><div><input autocomplete="off" name="time_frame" placeholder="y/m/d" type="text"></div><br>What do you want to set your pomodoro timer to?<br>See "How to use this site" link below for more information<div><input autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" name="create" value="create new table"></div>';}
+            </script>
+        </div>  
+    </center>  
+    </form>
+</div>
 <br>
 <center><a href="/howtouse">How to use this site</a></center>
+<br>
+<br>
+<br>
+<br>
+<center>based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> developed by Francesco Cirillo</center>
 {% endblock %}

@@ -111,12 +111,28 @@ def home():
         # if no days have been skipped, 0 tomato entries do not have to be added, and user can go straight to home page, otherwise entries with '0' tomato counts need to be added for each day missed
         if date_diff == 0:
             date_previous_data = db.execute("SELECT tomato_count, task, notes FROM daily_history WHERE table_id=:table_id AND date=:date", table_id=session['table_id'], date=current_date)
+                      
+            # the next ~20 lines make it so tasks and notes added in separate entry for same day have correct grammer
+            if date_previous_data[0]['task'] == None:
+                date_previous_data[0]['task'] = ""
 
-            previous_tomato_count = date_previous_data[0]['tomato_count']
-            previous_task = date_previous_data[0]['task']
-            previous_notes = date_previous_data[0]['notes']
+            if date_previous_data[0]['notes'] == None:
+                date_previous_data[0]['notes'] = ""
 
-            db.execute("UPDATE daily_history SET tomato_count=:tomato_count, task=:task, notes=:notes WHERE table_id=:table_id AND date=:date", tomato_count = previous_tomato_count + int(request.form.get("tomatoes")), task = previous_task + ", " +request.form.get("task"), notes = previous_notes + "| " +request.form.get("notes"), table_id=session['table_id'], date=current_date)
+            task_space = ""
+            notes_space = ""
+
+            if not date_previous_data[0]['task'] or not request.form.get("task"):
+                task_space =""
+            else:
+                task_space = ", "
+            
+            if not date_previous_data[0]['notes'] or not request.form.get("notes"):
+                notes_space = ""
+            else:
+                notes_space = ", "          
+            
+            db.execute("UPDATE daily_history SET tomato_count=:tomato_count, task=:task, notes=:notes WHERE table_id=:table_id AND date=:date", tomato_count = date_previous_data[0]['tomato_count'] + int(request.form.get("tomatoes")), task = date_previous_data[0]['task'] + task_space + request.form.get("task"), notes = date_previous_data[0]['notes'] + notes_space + request.form.get("notes"), table_id=session['table_id'], date=current_date)
 
             return redirect('/home')
         else:
@@ -199,3 +215,7 @@ def firstentry():
 @app.route('/howtouse')
 def howtouse():
     return render_template('howtouse.html')
+
+@app.route('/notes')
+def notes():
+    return render_template('notes.html')

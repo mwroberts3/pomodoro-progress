@@ -1,6 +1,17 @@
+a {
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(255, 0, 43);
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.15em;
+}
+
+.load {
+    /* need to figure out way to center load div */
+    margin: auto;
 }
 
 /* Set additional styling options for the columns */
@@ -84,6 +95,10 @@ details {
     font-weight: bold;
     font-style: italic;
     color: rgb(255, 220, 21);    
+}
+
+.notes {
+    font-size: 0.75em;
 }
 
 .footer {
