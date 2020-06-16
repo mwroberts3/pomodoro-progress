@@ -46,6 +46,7 @@ def load():
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
                 
                 # converts the time_frame string into individual years, months and days elements
+                # TODO take deadline input from user and determine the amount of days between now and then
                 session.update(time_frame_conversion(session))            
             
                 # DEBUG-CODE: return render_template("test.html", session=session, saved_tables=saved_tables)

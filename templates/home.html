@@ -28,10 +28,7 @@
 <div class="row">
     <div class="column left">
             <center>
-            <u><strong>About Table</strong></u>
-            <br>
-            <br>
-            "{{ session['table_name'] }}"
+            <strong>{{ session['table_name'] }}</strong>
             <br>
             <br>
             <strong>Purpose:</strong> 
@@ -42,7 +39,7 @@
             <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
             <br>
             <br>
-            <strong>Time Frame:</strong><br>{{ session['years'] }} years {{ session['months']}} months {{ session['days'] }} days
+            <strong>Deadline:</strong> TODO
             <br>
             <strong>[CONVERT TO DEADLINE SYSTEM]</strong>
             <br>
@@ -84,7 +81,7 @@
                                 <td>-</td>
                             {% endif %}                            
                             {% if row['notes'] != None and row['notes'] != "" %}
-                                <td class="notes"><a href="/notes">notes</a></td>
+                                <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
                             {% else %}
                                 <td>-</td>   
                             {% endif %}
@@ -97,7 +94,7 @@
                                 <td>-</td>
                             {% endif %}   
                             {% if row['notes'] != None and row['notes'] != "" %}
-                                <td class="notes"><a href="/notes">notes</a></td>
+                                <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
                             {% else %}
                                 <td>-</td>   
                             {% endif %}
@@ -109,23 +106,27 @@
         </center>
     </div>
     <div class="column right">
+        <center>
+        <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
+        <br>
+        <strong>Daily Average:</strong> {{ stats['daily_average'] }}
+        <br>
+        <strong>Pace:</strong>  
+        {% if stats['pace']['rate'] >= 100 %}
+            <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>
+        {% else %}
+            <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>  
+        {% endif %}
+        <br>
+        <br>
+        </center>
         <details>
-            <summary>Stats</summary>
+            <summary>More Stats</summary>
             <br>
             <center>
-                <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
-                <br>
-                <strong>Daily Average:</strong> {{ stats['daily_average'] }}
-                <br>
                 <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
                 <br>
-                <strong>Pace:</strong>  
-                    {% if stats['pace']['rate'] >= 100 %}
-                        <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>
-                    {% else %}
-                        <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>  
-                    {% endif %}
-                <br>
+                <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
                 <br>
                 <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
                 <br>

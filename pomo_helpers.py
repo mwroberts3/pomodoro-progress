@@ -20,16 +20,19 @@ def statistics(user_data, session):
     stats['daily_average'] = round(total_tomatoes/day_count, 2)
     stats['days_in_a_row'] = days_in_a_row
 
-    #to find pomodoros_left
-    if session['hours_goal'] == None or session['tomato_rate'] == None:
+    # to find pomodoros_left
+    if not session['hours_goal'] or not session['tomato_rate']:
         stats['pace'] = {'on_pace' : 'NA'}
         stats['pace'] = {'rate' : 0}
         return(stats)
 
     total_pomos = int((session['hours_goal'] * 60)/session['tomato_rate'])
     stats['pomos_left'] = total_pomos - stats['total_tomatoes']
-    
-    #to find pace
+
+    # to find completion % of goal
+    stats['completion_percentage'] = round(((stats['total_tomatoes'] / total_pomos) * 100))
+
+    # to find pace
     total_days = session['years'] * 365
     total_days += session['months'] * 30.42
     total_days += session['days']
@@ -53,7 +56,7 @@ def time_frame_conversion(session):
     session['days'] =""
     
     # breakdown time_frame into separate elements for year, month, and day
-    if session['time_frame'] == None:
+    if not session['time_frame']:
         return (session)
     else:
         i = 0
