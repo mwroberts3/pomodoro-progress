@@ -238,7 +238,7 @@ def journal():
         date_time = date.strftime('%I:%M%p')
 
         # checks to see if there's already a journal entry for current date
-        previous_entries = db.execute("SELECT date FROM journal WHERE date=:date", date = date_date)
+        previous_entries = db.execute("SELECT date FROM journal WHERE date=:date AND table_id=:table_id", date = date_date, table_id=session['table_id'])
         if len(previous_entries) == 1 or len(previous_entries) > 1:
             session['journal_same_date'] = False
         else:    
