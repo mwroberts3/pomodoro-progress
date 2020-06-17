@@ -4,7 +4,7 @@ from tempfile import mkdtemp
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
-from pomo_helpers import statistics, time_frame_conversion
+from pomo_helpers import statistics, deadline_conversion
 
 app = Flask(__name__)
 
@@ -43,11 +43,11 @@ def load():
                 session['purpose'] = saved_tables[0]['purpose']
                 session['hours_goal'] = saved_tables[0]['hours_goal']
                 session['time_frame'] = saved_tables[0]['time_frame']
+                session['start_date'] = saved_tables[0]['start_date']
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
                 
                 # converts the time_frame string into individual years, months and days elements
-                # TODO take deadline input from user and determine the amount of days between now and then
-                session.update(time_frame_conversion(session))            
+                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])           
             
                 # DEBUG-CODE: return render_template("test.html", session=session, saved_tables=saved_tables)
 
@@ -66,7 +66,7 @@ def load():
 
             else:    
                 # inserts new table name, with automatic id into tables table
-                db.execute("INSERT INTO tables (table_name, purpose, hours_goal, time_frame, tomato_rate) VALUES (?, ?, ?, ?, ?)", request.form.get("new_table_name"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
+                db.execute("INSERT INTO tables (table_name, purpose, hours_goal, time_frame, start_date, tomato_rate) VALUES (?, ?, ?, ?, date('now','localtime'), ?)", request.form.get("new_table_name"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
 
                 # pull up newly created table's ID and save to session list
                 saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
@@ -75,10 +75,11 @@ def load():
                 session['purpose'] = saved_tables[0]['purpose']
                 session['hours_goal'] = saved_tables[0]['hours_goal']
                 session['time_frame'] = saved_tables[0]['time_frame']
+                session['start_date'] = saved_tables[0]['start_date']
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
 
                 # converts the time_frame string into individual years, months and days elements
-                session.update(time_frame_conversion(session))                 
+                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])             
 
                 return redirect('/home')
     else:

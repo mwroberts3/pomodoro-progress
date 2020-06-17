@@ -28,7 +28,7 @@
 <div class="row">
     <div class="column left">
             <center>
-            <strong>{{ session['table_name'] }}</strong>
+            <strong><q>{{ session['table_name'] }}</q></strong>
             <br>
             <br>
             <strong>Purpose:</strong> 
@@ -39,9 +39,9 @@
             <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
             <br>
             <br>
-            <strong>Deadline:</strong> TODO
+            <strong>Start Date:</strong> {{ session['start_date'] }}
             <br>
-            <strong>[CONVERT TO DEADLINE SYSTEM]</strong>
+            <strong>Deadline:</strong> {{ session['time_frame'] }}
             <br>
             <br>
             <strong>Pomodoro Time:</strong> {{ session['tomato_rate'] }} minutes

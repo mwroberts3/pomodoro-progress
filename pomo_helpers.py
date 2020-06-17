@@ -1,3 +1,5 @@
+from datetime import date, datetime, timedelta
+
 def statistics(user_data, session):
     total_tomatoes = 0
     stats = {}
@@ -30,14 +32,10 @@ def statistics(user_data, session):
     stats['pomos_left'] = total_pomos - stats['total_tomatoes']
 
     # to find completion % of goal
-    stats['completion_percentage'] = round(((stats['total_tomatoes'] / total_pomos) * 100))
+    stats['completion_percentage'] = round(((stats['total_tomatoes'] / total_pomos) * 100), 1)
 
     # to find pace
-    total_days = session['years'] * 365
-    total_days += session['months'] * 30.42
-    total_days += session['days']
-
-    on_pace_average = total_pomos / total_days
+    on_pace_average = total_pomos / session['days_until_deadline']
 
     if stats['daily_average'] >= on_pace_average:
         stats['pace'] = {'on_pace' : 'on pace'}
@@ -50,29 +48,16 @@ def statistics(user_data, session):
     
     return (stats)
 
-def time_frame_conversion(session):
-    session['years'] =""
-    session['months'] =""
-    session['days'] =""
-    
-    # breakdown time_frame into separate elements for year, month, and day
-    if not session['time_frame']:
-        return (session)
-    else:
-        i = 0
-        for ele in session['time_frame']:
-            if ele == '/':
-                i += 1
-                continue
-            if i == 0:
-                session['years'] += ele
-            if i == 1:
-                session['months'] += ele
-            if i == 2:
-                session['days'] += ele
+def deadline_conversion(deadline, start_date):
+    #TODO need to skip this if user inputs incompatable or no date
+    if deadline is None:
+        deadline = datetime.today()
+    else:    
+        deadline = datetime.strptime(deadline, '%m/%d/%y')
+    # start_date defaults to current date in sqlite table when creating new
+    start_date = datetime.strptime(start_date, '%Y-%m-%d')
 
-        session['years'] = int(session['years'])
-        session['months'] = int(session['months'])
-        session['days'] = int(session['days'])  
+    # calculates the number of days between current date and previous entries day
+    date_diff = ((deadline - start_date).days)
 
-        return(session)
+    return(date_diff)
