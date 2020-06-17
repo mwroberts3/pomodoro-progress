@@ -5,7 +5,7 @@
 {% block header %}
 <header>
     <!-- figure out how to make logout and logo on the same line -->
-    <a href="/">logout</a>
+    <span><a href="/">logout</a> | <a href="/journal">journal</a></span>
     <center>
         <h1>Pomo Progress!</h1>
     </center>
@@ -131,6 +131,8 @@
                 <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
                 <br>
                 <strong>One Day Record:</strong> {{ stats['one_day_high']}}
+                <br>
+                <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
             </center>
         </details>
     </div>

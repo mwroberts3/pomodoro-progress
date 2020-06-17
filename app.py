@@ -19,7 +19,6 @@ Session(app)
 # dictionary used to store the table id that user wants to use.
 session = {}
 
-
 @app.route('/', methods=["GET", "POST"])
 def load():
     if request.method == "POST":
@@ -47,7 +46,13 @@ def load():
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
                 
                 # converts the time_frame string into individual years, months and days elements
-                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])           
+                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])
+
+                # converts the date formats in right column to something more easy to digest visually
+                session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
+                session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
+                session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
+                session['start_date'] = session['start_date'].strftime('%b %d, %Y')     
             
                 # DEBUG-CODE: return render_template("test.html", session=session, saved_tables=saved_tables)
 
@@ -79,7 +84,13 @@ def load():
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
 
                 # converts the time_frame string into individual years, months and days elements
-                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])             
+                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])    
+
+                # converts the date formats in right column to something more easy to digest visually
+                session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
+                session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
+                session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
+                session['start_date'] = session['start_date'].strftime('%b %d, %Y')     
 
                 return redirect('/home')
     else:
@@ -132,7 +143,7 @@ def home():
             if not date_previous_data[0]['notes'] or not request.form.get("notes"):
                 notes_space = ""
             else:
-                notes_space = ", "          
+                notes_space = " || "          
             
             db.execute("UPDATE daily_history SET tomato_count=:tomato_count, task=:task, notes=:notes WHERE table_id=:table_id AND date=:date", tomato_count = date_previous_data[0]['tomato_count'] + int(request.form.get("tomatoes")), task = date_previous_data[0]['task'] + task_space + request.form.get("task"), notes = date_previous_data[0]['notes'] + notes_space + request.form.get("notes"), table_id=session['table_id'], date=current_date)
 
@@ -218,6 +229,27 @@ def firstentry():
 def howtouse():
     return render_template('howtouse.html')
 
-@app.route('/notes')
-def notes():
-    return render_template('notes.html')
+@app.route('/journal', methods=["GET","POST"])
+def journal():
+    db = SQL("sqlite:///pomodoro.db")
+    if request.method == "POST":
+        date = datetime.today()
+        date_date = date.strftime('%b %d, %Y')
+        date_time = date.strftime('%I:%M%p')
+
+        # checks to see if there's already a journal entry for current date
+        previous_entries = db.execute("SELECT date FROM journal WHERE date=:date", date = date_date)
+        if len(previous_entries) == 1 or len(previous_entries) > 1:
+            session['journal_same_date'] = False
+        else:    
+            session['journal_same_date'] = True
+
+        if session['journal_same_date'] == True:
+            db.execute("INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, ?, ?)", session['table_id'], request.form.get("entry"), date_date, date_time)
+        else:
+            db.execute("INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, '', ?)", session['table_id'], request.form.get("entry"), date_time)
+                
+        return redirect('/journal')
+    else:
+        journal_data = db.execute("SELECT * FROM journal WHERE table_id=:table_id ORDER BY datetime DESC, time_exact ASC", table_id=session['table_id'])
+        return render_template('journal.html', session=session, journal_data=journal_data)

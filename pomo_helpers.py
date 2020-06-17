@@ -35,14 +35,14 @@ def statistics(user_data, session):
     stats['completion_percentage'] = round(((stats['total_tomatoes'] / total_pomos) * 100), 1)
 
     # to find pace
-    on_pace_average = total_pomos / session['days_until_deadline']
+    stats['on_pace_average'] = round((total_pomos / session['days_until_deadline']), 2)
 
-    if stats['daily_average'] >= on_pace_average:
+    if stats['daily_average'] >= stats['on_pace_average']:
         stats['pace'] = {'on_pace' : 'on pace'}
     else:
         stats['pace'] = {'on_pace' : 'off'}
     
-    stats['pace']['rate'] = round((stats['daily_average'] / on_pace_average) * 100) 
+    stats['pace']['rate'] = round((stats['daily_average'] / stats['on_pace_average']) * 100) 
     
     # DEBUG stats['test'] = int(total_days)
     

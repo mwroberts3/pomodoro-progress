@@ -6,12 +6,27 @@
 <header>
     <!-- figure out how to make logout and logo on the same line -->
     <a href="/">home</a>
-    <h1>How to Use Pomo Progress</h1>
+    <center><h2>How to Use Pomo Progress</h2></center>
 </header>
 {% endblock %}
 
 {% block main %}
 <p>This site will make a lot more sense if you're already familiar with the Pomodoro Technique, pioneered by <strong>[inventor's name]</strong>, because this site basically acts as a way to track your progress via the Pomodoro Technique. And, the ultimate purpose, is to just provide a tool that will hopefully help you acheive you're goal. Tracking your progress towards a goal will help keep you motivated and ultimately more likely to acheive it. <strong>[link to studies showing this]</strong>. Pomo Progress lets you add a deadline to a new table (but not required), so you know how many days you have to acheive your goal. There is a principle <strong>[look up principle]</strong>s that shows how tasks fit into deadlines, and if you set a deadline you're more likely to finish the task by within that certain amount of time.</p>
 <p>Everytime you work for the timelimit, you can add a pomodoro to the table for that day, along with a task name, and notes you may want to add. It may be easier to work for several pomodoros and then add them all at once.</p>
+<center><img src="/static/how-to-use-1.jpg" alt="sample Pomo Progress! table" style="border: 1px solid black;"></center>
+<center><div class="how-to-table">
+    <left>
+        <strong>Date</strong>-the date of your most recent entry. Multiple entries on the same date will be combined into one entry. Multiple tasks and notes can be added to the same date.
+        <br>
+        <br>
+        <strong>Pomodoros</strong>-shows the amount of pomodoros you accumulated for a given date. After 7 days, the daily amounts of pomodoros are added together for a weekly total.
+        <br>
+        <br>
+        <strong>Task(s)</strong>-lists what you focused on for the day, can have more than one task for a given day.
+        <br>
+        <br>
+        <strong>Notes</strong>-you have the option to add a short note each time you add more pomodoros to the table. <em>please keep the notes as brief as possible, a new notes system is being worked out for the next version</em>
+    </left>
+</div></center>
 
 {% endblock %}

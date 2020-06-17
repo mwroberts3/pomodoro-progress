@@ -75,6 +75,20 @@ td {
     
 }
 
+.journal {
+    width: 50%;
+    text-align: justify;
+}
+
+.how-to-table {
+    width: 75%;
+}
+
+textarea {
+    height: 100px;
+    width: 350px;
+  }
+
 details > summary {
     font-weight: bold;
     text-decoration: underline;
