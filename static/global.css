@@ -4,6 +4,10 @@ a {
     color: rgb(255, 0, 43);
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.15em;
@@ -11,7 +15,7 @@ body {
 
 .load {
     /* need to figure out way to center load div */
-    padding: 100px;
+    padding: 60px;
 }
 
 /* Set additional styling options for the columns */
@@ -76,7 +80,6 @@ td {
 
 .load-create {
     font-family: 'Courier New', Courier, monospace;
-    border: none;
     color: rgb(255,0,43);
     font-weight: bold;
     text-align: center;
@@ -84,7 +87,12 @@ td {
     font-size: 1em;
     cursor: pointer;
     background-color: rgb(241, 241, 241);
-    border: 1px solid black;
+    border: 1px solid rgb(34, 34, 34);
+    border-radius: 4px;
+}
+
+.load-create:hover {
+    background-color: rgb(230, 230, 230);
 }
 
 .journal {

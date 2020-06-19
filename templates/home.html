@@ -13,13 +13,13 @@
 {% block main %}
 <center>
     <form action="/home" method="post">
-        Pomodoros:
+        <strong>Pomodoros:</strong>
         <input name="tomatoes" placeholder="pomodoro count" type="number" required>
-        Task:
+        <strong>Task:</strong>
         <input name="task" placeholder="primary task" type="text">
-        Notes:
+        <strong>Notes:</strong>
         <input name="notes" placeholder="notes or secondary tasks" type="text">
-        <input type="submit">
+        <input type="submit" class="load-create">
     </form>
 </center>
     <hr>
@@ -134,5 +134,5 @@
             </center>
         </details>
     </div>
-<div>
+</div>
 {% endblock %}
