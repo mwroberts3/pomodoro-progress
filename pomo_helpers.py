@@ -50,7 +50,7 @@ def statistics(user_data, session):
 
 def deadline_conversion(deadline, start_date):
     #TODO need to skip this if user inputs incompatable or no date
-    if deadline is None:
+    if not deadline:
         deadline = datetime.today()
     else:    
         deadline = datetime.strptime(deadline, '%m/%d/%y')

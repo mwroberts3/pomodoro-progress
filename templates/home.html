@@ -71,7 +71,7 @@
                         <td class="week" colspan="2">Avg: {{ row['task'] }}</td>
                     {% else %}
                         {% if row['tomato_count']|int >= 10 %}    
-                            <td>{{ row['date'] }}</td>
+                            <td>{{ row['display_date'] }}</td>
                             <td class="pomos10">{{ row['tomato_count'] }}</td>
                             {% if row['task'] != None and row['task'] != "" %}
                                 <td>{{ row['task'] }}</td>
@@ -84,7 +84,7 @@
                                 <td>-</td>   
                             {% endif %}
                         {% else %}
-                            <td>{{ row['date'] }}</td>
+                            <td>{{ row['display_date'] }}</td>
                             <td class="pomos">{{ row['tomato_count'] }}</td>
                             {% if row['task'] != None and row['task'] != "" %}
                                 <td>{{ row['task'] }}</td>

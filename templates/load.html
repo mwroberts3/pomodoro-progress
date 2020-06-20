@@ -9,10 +9,12 @@
 </div>
 <header style="width: 50%; margin: auto;">
     <em>A tool designed to help you acheive your goals, based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> developed by Francesco Cirillo</em></center>
-    {% for message in get_flashed_messages() %}
-        <center><strong>{{ message }}</strong></center>
-    {% endfor %}
 </header>
+<br>
+<hr>
+{% for message in get_flashed_messages() %}
+    <center><strong>{{ message }}</strong></center>
+{% endfor %}
 {% endblock %}
 
 {% block main %}
@@ -22,7 +24,7 @@
     <form action="/" method="post">
         <div>
             <input autocomplete="on" name="table_name" placeholder="table name" type="text" required> 
-            <input autocomplete="on" name="password" placeholder="password" type="text" required>
+            <input autocomplete="off" name="password" placeholder="password" type="password" required>
             <br>
             <br>
             <input class="load-create" type="submit" name="load" value="load">
@@ -38,7 +40,7 @@
             <div id="new_table_display"></div>
             <script>
                 document.querySelector('#new_table').onclick = function(){
-                document.querySelector('#new_table_display').outerHTML = '<br><br>Choose a name and password for your new table:<div><input autocomplete="off" name="new_table_name" placeholder="new table name" type="text"></div><br><div><input autocomplete="off" name="new_password" placeholder="password" type="text"></div><br><div><input autocomplete="off" name="confirm_password" placeholder="confirm password" type="text"></div><br>What is the purpose of tracking your progress? <br>What are you trying to acheive?<div><textarea name="purpose" row="4" col="50" placeholder="purpose"></textarea></div><br>In how many hours do you want to acheive this goal?<div><input autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>When do you want to complete this goal by?<br><div><input autocomplete="off" name="time_frame" placeholder="mm/dd/yy" type="text"></div><br>What do you want to set your pomodoro timer to?<br>See "How to use this site" link below for more information<div><input autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" class="load-create" name="create" value="create new table"></div>';}
+                document.querySelector('#new_table_display').outerHTML = '<br><br>choose a name and password for your new table:<div><input autocomplete="off" name="new_table_name" placeholder="new table name" type="text" required></div><br><div><input autocomplete="off" name="new_password" placeholder="password" type="password" required>&nbsp;<input autocomplete="off" name="confirm_password" placeholder="confirm password" type="password" required></div><br>What is the purpose of tracking your progress? <br>What are you trying to acheive?<div><textarea name="purpose" row="4" col="50" placeholder="purpose"></textarea></div><br>In how many hours do you want to acheive this goal?<div><input autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>When do you want to complete this goal by?<br><div><input autocomplete="off" name="time_frame" type="date"></div><br>What do you want to set your pomodoro timer to?<br>See "How to use this site" link below for more information<div><input autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" class="load-create" name="create" value="create new table"></div>';}
             </script>
         </div>  
     </center>  

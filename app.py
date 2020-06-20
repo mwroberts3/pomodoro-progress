@@ -28,12 +28,12 @@ def load():
 
         # if user wants to load existing table
         if request.form.get("load"):
-            saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("table_name"))
+            saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name AND table_password=:table_password",table_name=request.form.get("table_name"), table_password=request.form.get("password"))
             
             # check to see if user input table name exists in database
             # if there is not exactly one list returned, then display error message
             if len(saved_tables) != 1:
-                flash('That table name does not exist, please check spelling')
+                flash('table name and/or password is incorrect, please check spelling and try again')
                 return render_template("load.html")
                    
             else:
@@ -66,12 +66,16 @@ def load():
 
             # checks to see if table with that name already exists in database
             if len(saved_tables) == 1:
-                flash('A table with that name already exists, please choose another')
+                flash('a table with that name already exists, please choose another')
+                return render_template("load.html")
+
+            if request.form.get("new_password") != request.form.get("confirm_password"):
+                flash('passwords do not match, please try again')
                 return render_template("load.html")
 
             else:    
                 # inserts new table name, with automatic id into tables table
-                db.execute("INSERT INTO tables (table_name, purpose, hours_goal, time_frame, start_date, tomato_rate) VALUES (?, ?, ?, ?, date('now','localtime'), ?)", request.form.get("new_table_name"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
+                db.execute("INSERT INTO tables (table_name, table_password, purpose, hours_goal, time_frame, start_date, tomato_rate) VALUES (?, ?, ?, ?, ?, date('now','localtime'), ?)", request.form.get("new_table_name"), request.form.get("new_password"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
 
                 # pull up newly created table's ID and save to session list
                 saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
@@ -87,7 +91,13 @@ def load():
                 session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])    
 
                 # converts the date formats in right column to something more easy to digest visually
-                session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
+                # first makes sure the user provided deadline (session['time_frame']) is in the correct format
+                if not session['time_frame']:
+                    session['time_frame'] = datetime.today()
+                    time_frame_insert = session['time_frame'].strftime('%m/%d/%y')
+                    db.execute("UPDATE tables SET time_frame =:time_frame WHERE id=:id", time_frame = time_frame_insert, id = session['table_id'])
+                else:
+                    session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
                 session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
                 session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
                 session['start_date'] = session['start_date'].strftime('%b %d, %Y')     
@@ -152,9 +162,14 @@ def home():
             date_diff -= 1
             while date_diff > 0:
                 db.execute("INSERT INTO daily_history (table_id, date, tomato_count) VALUES (?, ?, 0)", session['table_id'], current_date - timedelta(days=date_diff))
+                
+                strft_days = current_date - timedelta(days=date_diff)
+                
+                db.execute("UPDATE daily_history SET display_date=:display_date WHERE table_id=:table_id AND date=:date", display_date = strft_days.strftime('%m-%d'), table_id=session['table_id'], date = current_date - timedelta(days=date_diff))
+
                 date_diff -= 1
 
-            db.execute("INSERT INTO daily_history (table_id, date, tomato_count, task, notes) VALUES(?, date('now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
+            db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, date('now','localtime'), strftime('%m-%d','now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
             return redirect('/home')
 
 
@@ -219,7 +234,7 @@ def home():
 def firstentry():
     if request.method == "POST":
         db = SQL("sqlite:///pomodoro.db")
-        db.execute("INSERT INTO daily_history (table_id, date, tomato_count, task, notes) VALUES(?, date('now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
+        db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, date('now','localtime'), strftime('%m-%d','now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
         return redirect('/home')
 
     else:

@@ -1,19 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
-<header>
+<head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link rel="stylesheet" type="text/css" href="static/global.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="Pomo Progress! is a productivity tool designed to help you track your progress towards a goal. It was inspired by the Pomodoro Technique by Francesco Cirillo.">
+  <meta name="keywords" content="Pomodoro Technique, goals, tracking progress, self-development, tomato tracker, fitness, new skills, resolutions">
   <title>{% block title %}{% endblock %}</title>
-  
-  {% block header %}{% endblock %}
-</header>
+  <link rel="stylesheet" type="text/css" href="static/global.css">
+</head>
 
 <body>
+    {% block header %}{% endblock %}
     {% block main%}{% endblock %}
 </body>
 
