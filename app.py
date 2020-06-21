@@ -4,7 +4,7 @@ from tempfile import mkdtemp
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
-from pomo_helpers import statistics, deadline_conversion
+from pomo_helpers import statistics, deadline_conversion, current_date_diff
 
 app = Flask(__name__)
 
@@ -48,8 +48,11 @@ def load():
                 # converts the time_frame string into individual years, months and days elements
                 session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])
 
+                # finds the current number of days until you reach deadline
+                session['current_days_until_deadline'] = current_date_diff(session['time_frame'])
+
                 # converts the date formats in right column to something more easy to digest visually
-                session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
+                session['time_frame'] = datetime.strptime(session['time_frame'], '%Y-%m-%d')
                 session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
                 session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
                 session['start_date'] = session['start_date'].strftime('%b %d, %Y')     
@@ -88,7 +91,10 @@ def load():
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
 
                 # converts the time_frame string into individual years, months and days elements
-                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])    
+                session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])
+
+                # finds the current number of days until you reach deadline
+                session['current_days_until_deadline'] = current_date_diff(session['time_frame'])
 
                 # converts the date formats in right column to something more easy to digest visually
                 # first makes sure the user provided deadline (session['time_frame']) is in the correct format
@@ -97,7 +103,7 @@ def load():
                     time_frame_insert = session['time_frame'].strftime('%m/%d/%y')
                     db.execute("UPDATE tables SET time_frame =:time_frame WHERE id=:id", time_frame = time_frame_insert, id = session['table_id'])
                 else:
-                    session['time_frame'] = datetime.strptime(session['time_frame'], '%m/%d/%y')
+                    session['time_frame'] = datetime.strptime(session['time_frame'], '%Y-%m-%d')
                 session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
                 session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
                 session['start_date'] = session['start_date'].strftime('%b %d, %Y')     

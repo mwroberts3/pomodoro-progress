@@ -49,11 +49,10 @@ def statistics(user_data, session):
     return (stats)
 
 def deadline_conversion(deadline, start_date):
-    #TODO need to skip this if user inputs incompatable or no date
     if not deadline:
         deadline = datetime.today()
     else:    
-        deadline = datetime.strptime(deadline, '%m/%d/%y')
+        deadline = datetime.strptime(deadline, '%Y-%m-%d')
     # start_date defaults to current date in sqlite table when creating new
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
 
@@ -61,3 +60,10 @@ def deadline_conversion(deadline, start_date):
     date_diff = ((deadline - start_date).days)
 
     return(date_diff)
+
+def current_date_diff(deadline):
+    deadline = datetime.strptime(deadline, '%Y-%m-%d')
+    current_date = datetime.today()
+    current_date_diff = ((deadline - current_date).days)
+    return(current_date_diff)
+

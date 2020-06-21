@@ -5,7 +5,7 @@
 {% block header %}
 <div>
     <a href="/">logout</a> | <a href="/journal">journal</a>
-    <center><h1 style="display: inline;">Pomo Progress!</h1></center>
+    <center><img style="display: inline;" src="/static/home-banner.jpg" alt="Pomo Progress!"></center>
     <br>
 </div>
 {% endblock %}
@@ -23,116 +23,107 @@
     </form>
 </center>
     <hr>
-<div class="row">
-    <div class="column left">
-            <center>
-            <strong><q>{{ session['table_name'] }}</q></strong>
-            <br>
-            <br>
-            <strong>Purpose:</strong> 
-            <br>
-            {{ session['purpose'] }}
-            <br>
-            <br>
-            <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
-            <br>
-            <br>
-            <strong>Start Date:</strong> {{ session['start_date'] }}
-            <br>
-            <strong>Deadline:</strong> {{ session['time_frame'] }}
-            <br>
-            <br>
-            <strong>Pomodoro Time:</strong> {{ session['tomato_rate'] }} minutes
-            <br>
-            </center>
-    </div>
-    <div class="column middle">
-        <center>
-        <table id="pomodoro_data" style="display: inline-block;">
-            <th>Date</th>
-            <th>Pomodoros</th>
-            <th>Task(s)</th>
-            <th>Notes</th>
+<div class="column left">
+        <strong><q>{{ session['table_name'] }}</q></strong>
+        <br>
+        <br>
+        <strong>Purpose:</strong> 
+        <br>
+        {{ session['purpose'] }}
+        <br>
+        <br>
+        <strong>Pomodoro Time:</strong> {{ session['tomato_rate'] }} minutes
+        <br>
+        <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
+        <br>
+        <br>
+        <strong>Start Date:</strong> {{ session['start_date'] }}
+        <br>
+        <strong>Deadline:</strong> {{ session['time_frame'] }}
+        <br>
+        <strong>Days Until Deadline:</strong> {{ session['current_days_until_deadline']}}
+        <br>
+</div>
+<div class="column middle">
+    <table>
+        <th>Date</th>
+        <th>Pomodoros</th>
+        <th>Task(s)</th>
+        <th>Notes</th>
+        <tr>
+            {% if day_count > 0 %}
+                <td class="week">#{{ week_count + 1 }}</td>
+                <td class="week">Total: {{ tomato_total }}</td>
+                <td class="week" colspan="2">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
+            {% endif %}
+            {% if day_count == 0 %}
+                <!--if it has been exactly a week, do not display anything for upcoming week-->
+            {% endif %}
+        </tr>
+        {% for row in full_chart|reverse %}
             <tr>
-                {% if day_count > 0 %}
-                    <td class="week">#{{ week_count + 1 }}</td>
-                    <td class="week">Total: {{ tomato_total }}</td>
-                    <td class="week" colspan="2">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
-                {% endif %}
-                {% if day_count == 0 %}
-                    <!--if it has been exactly a week, do not display anything for upcoming week-->
-                {% endif %}
-            </tr>
-            {% for row in full_chart|reverse %}
-                <tr>
-                    {% if row['date']|float >= 1 %}
-                        <td class="week">#{{ row['date'] }}</td>
-                        <td class="week">Total: {{ row['tomato_count'] }}</td>
-                        <td class="week" colspan="2">Avg: {{ row['task'] }}</td>
-                    {% else %}
-                        {% if row['tomato_count']|int >= 10 %}    
-                            <td>{{ row['display_date'] }}</td>
-                            <td class="pomos10">{{ row['tomato_count'] }}</td>
-                            {% if row['task'] != None and row['task'] != "" %}
-                                <td>{{ row['task'] }}</td>
-                            {% else %}
-                                <td>-</td>
-                            {% endif %}                            
-                            {% if row['notes'] != None and row['notes'] != "" %}
-                                <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
-                            {% else %}
-                                <td>-</td>   
-                            {% endif %}
+                {% if row['date']|float >= 1 %}
+                    <td class="week">#{{ row['date'] }}</td>
+                    <td class="week">Total: {{ row['tomato_count'] }}</td>
+                    <td class="week" colspan="2">Avg: {{ row['task'] }}</td>
+                {% else %}
+                    {% if row['tomato_count']|int >= 10 %}    
+                        <td>{{ row['display_date'] }}</td>
+                        <td class="pomos10">{{ row['tomato_count'] }}</td>
+                        {% if row['task'] != None and row['task'] != "" %}
+                            <td>{{ row['task'] }}</td>
                         {% else %}
-                            <td>{{ row['display_date'] }}</td>
-                            <td class="pomos">{{ row['tomato_count'] }}</td>
-                            {% if row['task'] != None and row['task'] != "" %}
-                                <td>{{ row['task'] }}</td>
-                            {% else %}
-                                <td>-</td>
-                            {% endif %}   
-                            {% if row['notes'] != None and row['notes'] != "" %}
-                                <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
-                            {% else %}
-                                <td>-</td>   
-                            {% endif %}
+                            <td>-</td>
+                        {% endif %}                            
+                        {% if row['notes'] != None and row['notes'] != "" %}
+                            <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
+                        {% else %}
+                            <td>-</td>   
+                        {% endif %}
+                    {% else %}
+                        <td>{{ row['display_date'] }}</td>
+                        <td class="pomos">{{ row['tomato_count'] }}</td>
+                        {% if row['task'] != None and row['task'] != "" %}
+                            <td>{{ row['task'] }}</td>
+                        {% else %}
+                            <td>-</td>
+                        {% endif %}   
+                        {% if row['notes'] != None and row['notes'] != "" %}
+                            <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
+                        {% else %}
+                            <td>-</td>   
                         {% endif %}
                     {% endif %}
-                </tr>
-            {% endfor %}
-        </table>
-        </center>
-    </div>
-    <div class="column right">
-        <center>
-        <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="column right">
+    <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
+    <br>
+    <strong>Daily Average:</strong> {{ stats['daily_average'] }}
+    <br>
+    <strong>Pace:</strong>  
+    {% if stats['pace']['rate'] >= 100 %}
+        <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>
+    {% else %}
+        <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>  
+    {% endif %}
+    <br>
+    <br>
+    <details>
+        <summary>More Stats</summary>
         <br>
-        <strong>Daily Average:</strong> {{ stats['daily_average'] }}
-        <br>
-        <strong>Pace:</strong>  
-        {% if stats['pace']['rate'] >= 100 %}
-            <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>
-        {% else %}
-            <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> {{ stats['pace']['on_pace'] }}</span>  
-        {% endif %}
-        <br>
-        <br>
-        </center>
-        <details>
-            <summary>More Stats</summary>
+            <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
             <br>
-            <center>
-                <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
-                <br>
-                <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
-                <br>
-                <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
-                <br>
-                <strong>One Day Record:</strong> {{ stats['one_day_high']}}
-                <br>
-                <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
-            </center>
-        </details>
-    </div>
+            <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
+            <br>
+            <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
+            <br>
+            <strong>One Day Record:</strong> {{ stats['one_day_high']}}
+            <br>
+            <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
+    </details>
 </div>
 {% endblock %}

@@ -3,15 +3,14 @@
 {% block title %}Pomo Progress{% endblock %}
 
 {% block header %}
-<div>
-    <center><h1 style="display: inline;">Pomo Progress!</h1></center>
-    <br>
-</div>
-<header style="width: 50%; margin: auto;">
-    <em>A tool designed to help you acheive your goals, based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> developed by Francesco Cirillo</em></center>
-</header>
-<br>
-<hr>
+    <div>
+        <center><img style="display: inline;" src="/static/main-banner.jpg" class="header-banner" alt="Pomo Progress!"></center>
+    </div>
+    <div class="small-text">
+        <center><em>a tool designed to help acheive your goals,
+        based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a></em></center>
+    </div>
+    <hr>
 {% for message in get_flashed_messages() %}
     <center><strong>{{ message }}</strong></center>
 {% endfor %}

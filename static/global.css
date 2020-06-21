@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
 a {
     font-weight: bolder;
     text-decoration: none;
@@ -5,15 +11,23 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    color:coral;
 }
 
 body {
     align-content: center;
     margin: auto;
     width: 95%;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.15em;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    line-height: 1.6em;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.header-banner {
+    width: 650px;
+    height: 66px;
 }
 
 .load {
@@ -23,34 +37,33 @@ body {
 
 /* Set additional styling options for the columns */
 .column {
-float: left;
+width: 32.8%;
+display: inline-block;
+vertical-align: top;
+margin-top: 10px;
 }
 
 /* Set width length for the left, right and middle columns */
 .left {
-width: 30%;
-margin-top: 60px;
+    align-content: center;
+    text-align: center;
 }
 
 .middle {
-width: 40%;
+    background-color: #f4f4f4;
+    margin-top: 0;
+    padding: 10px;
 }
 
 .right {
-width: 30%;
-margin-top: 60px;
-}
-
-.row:after {
-content: "";
-display: table;
-clear: both;
+    align-content: center;
+    text-align: center;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1.15em;
+    font-size: 1em;
 }
 
 th {
@@ -87,15 +100,15 @@ td {
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1.1em;
     cursor: pointer;
-    background-color: rgb(221, 221, 221);
-    border: 1px solid rgb(34, 34, 34);
+    background-color:  rgb(224, 224, 224);
+    border: 1px solid #000;
     border-radius: 4px;
 }
 
 .load-create:hover {
-    background-color: rgb(212, 212, 212);
+    background-color: rgb(235, 235, 235);
 }
 
 .journal {
@@ -150,4 +163,10 @@ details {
     font-weight: bold;
     font-style: italic;
     color: rgb(255, 220, 21);    
+}
+
+.small-text {
+    width: 50%; 
+    margin: auto; 
+    font-size: small;
 }
