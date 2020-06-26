@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/* Links */
 a {
     font-weight: bolder;
     text-decoration: none;
@@ -11,7 +12,18 @@ a {
 }
 
 a:hover {
-    color:coral;
+    color:rgb(255, 102, 46);
+}
+
+/* Utilities */
+.no-outline:focus {
+    outline: none;
+    border-color: rgb(219, 67, 97);
+}
+
+.basic-responsive {
+    display: inline;
+    max-width: 100%;
 }
 
 body {
@@ -35,53 +47,96 @@ body {
     padding: 45px;
 }
 
-/* Set additional styling options for the columns */
+.load-table input {
+    display: block;
+}
+
+/* 'Home' Page */
 .column {
-width: 32.8%;
+max-width: 100%;
 display: inline-block;
 vertical-align: top;
 margin-top: 10px;
+overflow: visible;
 }
 
 /* Set width length for the left, right and middle columns */
 .left {
-    align-content: center;
+    width: 25%;
+    margin-top: 50px;
     text-align: center;
 }
 
 .middle {
-    background-color: #f4f4f4;
+    max-width: 48%;
     margin-top: 0;
     padding: 10px;
+    overflow-x: auto;
 }
 
 .right {
-    align-content: center;
+    width: 25%;
+    margin-top: 50px;
     text-align: center;
 }
 
+/* Pomo Table */
 table {
-    width: 100%;
+    /* I think in order for the table to shrink when going to a smaller screen, or shrinking window, the text within the table needs to shrink */
+    max-width: 100%;
+    border: 1px solid rgb(105, 105, 105);
     border-collapse: collapse;
     font-size: 1em;
+    background-color: #f8f8f8;
 }
 
 th {
     color: white;
     background: black;
-    padding: 5px;
+    padding: 4px;
+    padding-bottom: 9px;
     width: 33%;
     border: 1px solid black;
     border-collapse: collapse;
+
+}
+
+tr {
+    border: 1px dashed rgb(105, 105, 105);
 }
 
 td {
-    border: 1px solid black;
-    padding: 7px;
+    /* border: 1px solid black; */
+    padding: 4px;
     text-align: center;
     width: 33%;
 }
 
+.week {
+    color: white;
+    background: rgb(39, 39, 39);
+    font-weight: bold;
+}
+
+.week-solid {
+    border-bottom: 1px solid rgb(105, 105, 105);
+    border-top: 1px solid rgb(105, 105, 105);
+}
+
+.pomos {
+    background: rgb(39, 39, 39);
+    font-weight: bold;
+    color: white;
+}
+
+.pomos10 {
+    background: rgb(39, 39, 39);
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(255, 220, 21);    
+}
+
+/* Buttons and Input Fields */
 .notes {
     font-family: 'Courier New', Courier, monospace;
     border: none;
@@ -91,24 +146,41 @@ td {
     text-decoration: none;
     font-size: 0.75em;
     cursor: pointer;
-    background-color: white;
+    background-color: #f8f8f8;
+}
+
+.wide-form {
+    width: 175px;
+    padding: 5px;
+    margin-bottom:8px;
+    border: 1px solid rgb(131, 131, 131);
+    border-radius: 4px;
+}
+
+.wide-form:focus {
+    outline: none;
+    border-color: rgb(218, 44, 79);
 }
 
 .load-create {
+    padding: 3px 7px;
     font-family: 'Courier New', Courier, monospace;
-    color: rgb(255,0,43);
     font-weight: bold;
-    text-align: center;
-    text-decoration: none;
     font-size: 1.1em;
     cursor: pointer;
+    color: rgb(255,0,43);
     background-color:  rgb(224, 224, 224);
-    border: 1px solid #000;
-    border-radius: 4px;
+    border: 1px solid rgb(131, 131, 131);
+    border-radius: 7px;
 }
 
 .load-create:hover {
     background-color: rgb(235, 235, 235);
+}
+
+.load-create:focus {
+    outline: none;
+    border-color: rgb(218, 44, 79);
 }
 
 .journal {
@@ -132,37 +204,13 @@ textarea {
 
 details > summary {
     font-weight: bold;
-    text-decoration: underline;
-    margin: auto;
-    width: 160px;
+    width: 200px;
     cursor: pointer;
 }
 
 details {
-    align-content: center;
-    margin: auto;
-    width: 300px;
+    width: 100%;
     cursor: pointer;
-}
-
-.week {
-    color: white;
-    background: rgb(39, 39, 39);
-    font-weight: bold;
-    border: none;
-}
-
-.pomos {
-    background: rgb(39, 39, 39);
-    font-weight: bold;
-    color: white;
-}
-
-.pomos10 {
-    background: rgb(39, 39, 39);
-    font-weight: bold;
-    font-style: italic;
-    color: rgb(255, 220, 21);    
 }
 
 .small-text {

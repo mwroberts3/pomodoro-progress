@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Pomo Progress{% endblock %}
+{% block title %}Pomo Progress! - {{ session['table_name'] }}{% endblock %}
 
 {% block header %}
 <div>
     <a href="/">logout</a> | <a href="/journal">journal</a>
-    <center><img style="display: inline;" src="/static/home-banner.jpg" alt="Pomo Progress!"></center>
+    <center><img class="basic-reponsive" src="/static/home-banner.jpg" alt="Pomo Progress!"></center>
     <br>
 </div>
 {% endblock %}
@@ -14,11 +14,11 @@
 <center>
     <form action="/home" method="post">
         <strong>Pomodoros:</strong>
-        <input name="tomatoes" placeholder="pomodoro count" type="number" required>
+        <input class="wide-form" name="tomatoes" placeholder="pomodoro count" type="number" required>
         <strong>Task:</strong>
-        <input name="task" placeholder="primary task" type="text">
+        <input class="wide-form" name="task" placeholder="primary task" type="text">
         <strong>Notes:</strong>
-        <input name="notes" placeholder="notes or secondary tasks" type="text">
+        <input class="wide-form" name="notes" placeholder="notes or secondary tasks" type="text">
         <input type="submit" class="load-create">
     </form>
 </center>
@@ -26,18 +26,18 @@
 <div class="column left">
         <strong><q>{{ session['table_name'] }}</q></strong>
         <br>
+        {{ session['start_date'] }}
+        <br>
         <br>
         <strong>Purpose:</strong> 
         <br>
         {{ session['purpose'] }}
         <br>
         <br>
-        <strong>Pomodoro Time:</strong> {{ session['tomato_rate'] }} minutes
-        <br>
         <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
         <br>
+        <strong>Pomodoro Timer:</strong> {{ session['tomato_rate'] }} min
         <br>
-        <strong>Start Date:</strong> {{ session['start_date'] }}
         <br>
         <strong>Deadline:</strong> {{ session['time_frame'] }}
         <br>
@@ -50,11 +50,11 @@
         <th>Pomodoros</th>
         <th>Task(s)</th>
         <th>Notes</th>
-        <tr>
+        <tr> 
             {% if day_count > 0 %}
-                <td class="week">#{{ week_count + 1 }}</td>
-                <td class="week">Total: {{ tomato_total }}</td>
-                <td class="week" colspan="2">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
+                <td class="week week-solid">#{{ week_count + 1 }}</td>
+                <td class="week week-solid">Total: {{ tomato_total }}</td>
+                <td class="week week-solid" colspan="2">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
             {% endif %}
             {% if day_count == 0 %}
                 <!--if it has been exactly a week, do not display anything for upcoming week-->
@@ -63,9 +63,9 @@
         {% for row in full_chart|reverse %}
             <tr>
                 {% if row['date']|float >= 1 %}
-                    <td class="week">#{{ row['date'] }}</td>
-                    <td class="week">Total: {{ row['tomato_count'] }}</td>
-                    <td class="week" colspan="2">Avg: {{ row['task'] }}</td>
+                    <td class="week week-solid">#{{ row['date'] }}</td>
+                    <td class="week week-solid">Total: {{ row['tomato_count'] }}</td>
+                    <td class="week week-solid" colspan="2">Avg: {{ row['task'] }}</td>
                 {% else %}
                     {% if row['tomato_count']|int >= 10 %}    
                         <td>{{ row['display_date'] }}</td>
@@ -113,17 +113,18 @@
     <br>
     <br>
     <details>
-        <summary>More Stats</summary>
-        <br>
+        <summary class="no-outline">More Stats</summary>
+            <br>
             <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
             <br>
             <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
             <br>
-            <strong>Current Streak:</strong> {{ stats['days_in_a_row'] }} days
-            <br>
-            <strong>One Day Record:</strong> {{ stats['one_day_high']}}
-            <br>
             <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
+            <br>
+            <br>
+            <strong>Streak:</strong> {{ stats['days_in_a_row'] }} days
+            <br>
+            <strong>One Day Record:</strong> {{ stats['one_day_high'] }}    
     </details>
 </div>
 {% endblock %}
