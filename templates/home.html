@@ -3,27 +3,31 @@
 {% block title %}Pomo Progress! - {{ session['table_name'] }}{% endblock %}
 
 {% block header %}
-<div>
-    <a href="/">logout</a> | <a href="/journal">journal</a>
-    <center><img class="basic-reponsive" src="/static/home-banner.jpg" alt="Pomo Progress!"></center>
+<div id="home-header">
+    <div class="navlinks">
+        <a href="/">logout</a> | <a href="/journal">journal</a>
+    </div>
+    <img class="basic-reponsive" src="/static/home-banner.jpg" alt="Pomo Progress!">
     <br>
 </div>
 {% endblock %}
 
 {% block main %}
 <center>
-    <form action="/home" method="post">
-        <strong>Pomodoros:</strong>
-        <input class="wide-form" name="tomatoes" placeholder="pomodoro count" type="number" required>
-        <strong>Task:</strong>
-        <input class="wide-form" name="task" placeholder="primary task" type="text">
-        <strong>Notes:</strong>
+    <form id="add-pomos" action="/home" method="post">
+        <div class="separation-for-smaller">
+            <label for="pomos">Pomodoros:</label>
+            <input class="wide-form" name="tomatoes" placeholder="pomodoro count" type="number" required>
+            <label for="task">Task:</label>
+            <input class="wide-form" name="task" placeholder="primary task" type="text">
+        </div>
+        <label for="notes">Notes:</label>
         <input class="wide-form" name="notes" placeholder="notes or secondary tasks" type="text">
         <input type="submit" class="load-create">
     </form>
 </center>
     <hr>
-<div class="column left">
+<div class="left">
         <strong><q>{{ session['table_name'] }}</q></strong>
         <br>
         {{ session['start_date'] }}
@@ -43,8 +47,10 @@
         <br>
         <strong>Days Until Deadline:</strong> {{ session['current_days_until_deadline']}}
         <br>
+        <br>
+        <span class="stats-link"><a href="#stats">view stats</a></span>
 </div>
-<div class="column middle">
+<div class="middle">
     <table>
         <th>Date</th>
         <th>Pomodoros</th>
@@ -99,7 +105,10 @@
         {% endfor %}
     </table>
 </div>
-<div class="column right">
+
+<div class="right" id="stats"> 
+    <strong>Stats</strong>
+    <br>
     <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
     <br>
     <strong>Daily Average:</strong> {{ stats['daily_average'] }}
@@ -113,7 +122,7 @@
     <br>
     <br>
     <details>
-        <summary class="no-outline">More Stats</summary>
+        <summary class="no-outline">More</summary>
             <br>
             <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
             <br>

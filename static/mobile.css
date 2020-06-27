@@ -1,0 +1,32 @@
+/* Main Style */
+
+/* Home (table view)*/
+#add-pomos .separation-for-smaller {
+    display: block;
+}
+
+#add-pomos .separation-for-smaller label[for="task"] {
+    margin-left: 20px;
+}
+
+.left {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.middle {
+    display: block;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    max-height: 100vh;
+    overflow: auto;
+}
+
+.right {
+    width: 100%;
+    margin-top: 0;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+/* Home (table view)*/
+#add-pomos .separation-for-smaller {
+    display: block;
+}
+
+    .left {
+        float: left;
+        vertical-align: top;
+        /* display: inline-block; */
+        width: 25%;
+        margin-top: 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .middle {
+        float: right;
+        /* display: inline-block; */
+        max-width: 74%;
+        margin-top: 0;
+        padding: 10px;
+        overflow-x: auto;
+    }
+    
+    .right {
+        float: none;
+        vertical-align: top;
+        /* display: inline-block; */
+        width: 25%;
+        margin-top: 50px;
+        text-align: center;
+    }

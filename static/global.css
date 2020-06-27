@@ -1,10 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
 
+/* Main Styling */
 * {
     box-sizing: border-box;
 }
 
-/* Links */
+body {
+    align-content: center;
+    margin: auto;
+    width: 95%;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    line-height: 1.6em;
+    box-sizing: border-box;
+    position: relative;
+}
+
 a {
     font-weight: bolder;
     text-decoration: none;
@@ -26,17 +37,6 @@ a:hover {
     max-width: 100%;
 }
 
-body {
-    align-content: center;
-    margin: auto;
-    width: 95%;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1em;
-    line-height: 1.6em;
-    box-sizing: border-box;
-    position: relative;
-}
-
 .header-banner {
     width: 650px;
     height: 66px;
@@ -51,30 +51,50 @@ body {
     display: block;
 }
 
-/* 'Home' Page */
-.column {
-max-width: 100%;
-display: inline-block;
-vertical-align: top;
-margin-top: 10px;
-overflow: visible;
+/* Home (table view)*/
+#home-header .navlinks {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#home-header img {
+    display: block;
+    max-width: 95%;
+    margin: auto;
+}
+
+#add-pomos label {
+    font-weight: bold;
+}
+
+#add-pomos .separation-for-smaller {
+    display: inline;
 }
 
 /* Set width length for the left, right and middle columns */
 .left {
+    float: left;
+    vertical-align: top;
+    /* display: inline-block; */
     width: 25%;
     margin-top: 50px;
     text-align: center;
 }
 
 .middle {
+    float: left;
+    /* display: inline-block; */
     max-width: 48%;
     margin-top: 0;
     padding: 10px;
-    overflow-x: auto;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 .right {
+    float: left;
+    vertical-align: top;
+    /* display: inline-block; */
     width: 25%;
     margin-top: 50px;
     text-align: center;
