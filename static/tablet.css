@@ -19,7 +19,8 @@
         max-width: 74%;
         margin-top: 0;
         padding: 10px;
-        overflow-x: auto;
+        max-height: 180vh;
+        overflow: auto;
     }
     
     .right {
@@ -29,4 +30,11 @@
         width: 25%;
         margin-top: 50px;
         text-align: center;
+    }
+
+    #footer.load {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }

@@ -15,7 +15,7 @@
     <form action="/journal" method="post">
         <textarea class="entry" name="entry" placeholder="new journal entry..." type="text" required></textarea>
         <br>
-        <input name="submit_entry" value="submit new entry" type="submit">
+        <input class="load-create" name="submit_entry" value="submit new entry" type="submit">
     </form>
     <hr>
 </center>
@@ -33,4 +33,9 @@
             {% endfor %}
         </div>
 </center>
+<footer id="footer">
+    <em>Pomo Progress is not affliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
+    <br>
+    version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a>
+</footer>
 {% endblock %}

@@ -6,13 +6,12 @@
 }
 
 body {
-    align-content: center;
     margin: auto;
     width: 95%;
     font-family: 'Roboto Mono', monospace;
     font-size: 1em;
     line-height: 1.6em;
-    box-sizing: border-box;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -24,6 +23,10 @@ a {
 
 a:hover {
     color:rgb(255, 102, 46);
+}
+
+p {
+    margin-top: 0;
 }
 
 /* Utilities */
@@ -49,6 +52,14 @@ a:hover {
 
 .load-table input {
     display: block;
+}
+
+.clr {
+    clear: left;
+}
+
+.mobile-link {
+    display: none;
 }
 
 /* Home (table view)*/
@@ -98,6 +109,27 @@ a:hover {
     width: 25%;
     margin-top: 50px;
     text-align: center;
+}
+
+details summary {
+    font-weight: bold;
+    width: 100px;
+    margin: auto;
+    cursor: pointer;
+}
+
+details {
+    width: 100%;
+    cursor: pointer;
+}
+
+.middle::-webkit-scrollbar {
+    width: 15px;
+  }
+   
+.middle::-webkit-scrollbar-thumb {
+    background: #d53130;
+    border-radius: 10px;
 }
 
 /* Pomo Table */
@@ -203,13 +235,52 @@ td {
     border-color: rgb(218, 44, 79);
 }
 
+textarea {
+    height: 20vh;
+    width: 50vw;
+    border: 1px solid rgb(131, 131, 131);
+    border-radius: 7px;
+  }
+
+textarea:focus {
+    outline: none;
+    border-color: rgb(218, 44, 79);
+}
+
+/* Journal */
 .journal {
-    width: 50%;
+    width: 80%;
     text-align: justify;
 }
 
-.how-to-table {
-    width: 75%;
+/* How to Use this Site */
+#how-to-pic {
+    border: 2px solid #999; 
+    float: right; 
+    display: block; 
+    margin-left: 25px; 
+    max-width: 409px;
+}
+
+#howtouse h3, h4 {
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#howtouse p {
+    text-align: justify;
+    margin-left: 20px;
+}
+
+#howtouse #how-to-contents {
+    width: 40%;
+    margin: auto;
+}
+
+#howtouse #how-to-contents h3 {
+    text-align: center
+    ;
 }
 
 tip-notice {
@@ -217,24 +288,24 @@ tip-notice {
     font-weight: bold;
 }
 
-textarea {
-    height: 100px;
-    width: 350px;
-  }
-
-details > summary {
-    font-weight: bold;
-    width: 200px;
-    cursor: pointer;
+/* Footer */
+#footer {
+    text-align: center;
+    width: 100%; 
+    font-size: 0.72rem;
+    margin: auto;
 }
 
-details {
-    width: 100%;
-    cursor: pointer;
+#footer.load {
+    position: fixed;
+    bottom: -5%;
+    left: 0;
+    right: 0;
 }
 
-.small-text {
-    width: 50%; 
-    margin: auto; 
-    font-size: small;
+#footer.home {
+    position: absolute;
+    bottom: -12%;
+    left: 0;
+    right: 0;
 }

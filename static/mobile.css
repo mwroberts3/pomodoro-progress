@@ -30,3 +30,25 @@
     margin-top: 0;
     text-align: center;
 }
+
+.mobile-link {
+    display: block;
+}
+
+/* width */
+.middle::-webkit-scrollbar {
+    display: none;
+  }
+   
+/* Handle */
+.middle::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+/* Footer */
+#footer.home {
+    position: absolute;
+    bottom: -130%;
+    left: 0;
+    right: 0;
+}

@@ -27,7 +27,7 @@
     </form>
 </center>
     <hr>
-<div class="left">
+<div id="info" class="left">
         <strong><q>{{ session['table_name'] }}</q></strong>
         <br>
         {{ session['start_date'] }}
@@ -48,7 +48,7 @@
         <strong>Days Until Deadline:</strong> {{ session['current_days_until_deadline']}}
         <br>
         <br>
-        <span class="stats-link"><a href="#stats">view stats</a></span>
+        <span class="mobile-link"><a href="#stats">view stats</a></span>
 </div>
 <div class="middle">
     <table>
@@ -135,5 +135,11 @@
             <br>
             <strong>One Day Record:</strong> {{ stats['one_day_high'] }}    
     </details>
+    <span class="mobile-link"><a href="#info">back</a></span>
 </div>
+<footer id="footer" class="home">
+    <em>Pomo Progress is not affliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
+    <br>
+  version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a> 
+</footer>
 {% endblock %}
