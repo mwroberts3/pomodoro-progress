@@ -5,32 +5,73 @@
 {% block header %}
     <div>
         <a href="/">home</a>
-        <center><h2 style="display: inline;">How to Use Pomo Progress</h2></center>
+        <center><h2 style="display: inline;">How to Use Pomo Progress!</h2></center>
     </div>
     <hr>
 {% endblock %}
 
 {% block main %}
-<p>The purpose of this website is to help users acheive goals they set for themselves; goals like losing a certain amount of weight within a set amount of time, or finishing that first draft of the novel they've been working on. This site was inspired by the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> and will make a lot more sense if you're already familiar with it. The learning technique was developed by <strong>Francesco Cirillo</strong> in the late 1980s. The basics of the technique involve working for a set amount of time--about 25 minutes--and then taking a 3 to 5 minute break. After working a 25 minute block four times, users of the technique are encouraged to take a 15 - 30 minute break before attemping another set. The reasoning for this is that supposedly people are better able to retain the information they just by taking short breaks between their study sessions.</p>    
-<p>because this site basically acts as a way to track your progress via the Pomodoro Technique. And, the ultimate purpose, is to just provide a tool that will hopefully help you acheive you're goal. Tracking your progress towards a goal will help keep you motivated and ultimately more likely to acheive it. <strong>[link to studies showing this]</strong>. Pomo Progress lets you add a deadline to a new table (but not required), so you know how many days you have to acheive your goal. There is a principle <strong>[look up principle]</strong>s that shows how tasks fit into deadlines, and if you set a deadline you're more likely to finish the task by within that certain amount of time.</p>
-<p>Everytime you work for the timelimit, you can add a pomodoro to the table for that day, along with a task name, and notes you may want to add. It may be easier to work for several pomodoros and then add them all at once. Take a look at the table below to see an example.</p>
-<center><img src="/static/how-to-use-1.jpg" alt="sample Pomo Progress! table" style="border: 1px solid black;"></center>
-<center><div class="how-to-table">
-    <strong>Date</strong>-the date of your most recent entry. Multiple entries on the same date will be combined into one entry. Multiple tasks and notes can be added to the same date.
-    <br>
-    <br>
-    <strong>Pomodoros</strong>-shows the amount of pomodoros you accumulated for a given date. After 7 days, the daily amounts of pomodoros are added together for a weekly total.
-    <br>
-    <br>
-    <strong>Task(s)</strong>-lists what you focused on for the day, can have more than one task for a given day.
-    <br>
-    <br>
-    <strong>Notes</strong>-you have the option to add a short note each time you add more pomodoros to the table. <em>please keep the notes as brief as possible, a new notes system is being worked out for the next version</em>
-    <!--make this tip notice show and hide text like that js example on w3schools-->
-    <tip-notice>TIP:</tip-notice> if you want to add new notes or tasks <em>without</em> adding pomodoros, you can just put a '0' in that field and then write in the task and/or notes you want to add to that day.
-</div></center>
-<p>
-    Another notable feature is the <strong>journal</strong>, which will allow you to type out and save your thoughts about your journey without any character limit. Journaling and planning out your progress step-by-step should help you realize and make progress towards your goal, especially if the goal is something rather vague and complex, like making a career change over the next year.
-</p>
+<section id="howtouse">
+    <div id="how-to-contents">
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#1">The Purpose of Pomo Progress!</a></li>
+                <ul>
+                    <li><a href="#1.1">Inspired By and Based on the Pomodoro-Technique</a></li>
+                    <li><a href="#1.2">Deadlines Help You Acheive Goals</a></li>
+                </ul>
+            <li><a href="#2">Creating and Using a Table</a></li>
+                <ul>
+                    <li><a href="#2.1">How to Create a New Table</a></li>
+                    <li><a href="#2.2">Viewing the Table Data</a></li>
+                </ul>
+            <li><a href="#3">Other Features</a></li>
+                <ul>
+                    <li><a href="#3.1">Thanks!</a></li>
+                </ul>
+        </ul>
+    </div>
+    <h3 id="1">The Purpose of Pomo Progress!</h3>
+    <p>The purpose of this website is to help users acheive goals; goals like losing weight, finishing an art project, or learning a new skill. One of the biggest challenges of completing tasks, especially ones we set for ourselves, is understanding the scope of what it takes to complete it, and figuring out the amount of time we can truly invest in pursuit of a certain goal.</p>
 
+    <h4 id="1.1">Inspired By and Based on the Pomodoro Technique™</h4>
+    <p>This site was inspired by the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a> and will make a lot more sense if you're already familiar with it. The learning technique was developed by <strong>Francesco Cirillo</strong> in the late 1980s. The basics of the technique involve working for a set amount of time--about 25 minutes--and then taking a 3 to 5 minute break. After working a 25 minute block four times, users of the technique are encouraged to take a 15 - 30 minute break before attemping another set. The reasoning for this is that supposedly people are better able to retain the information they just by taking short breaks between their study sessions.</p>    
+    <p>Version 1.0 of this website does not have a built-in timer; its basic purpose is to simply be an organization tool to help you acheive longer-term goals. Use any external timer you want to time intervals. The <a href="#" onClick="MyWindow=window.open('https://www.google.com/search?q=timer&oq=timer&aqs=chrome.0.69i59j0l5j69i61j69i60.995j0j7&sourceid=chrome&ie=UTF-8','MyWindow','width=600,height=300'); return false;">Google timer</a> is simple and effective.
+    <h4 id="1.2">Deadlines Help You Acheive Goals</h4>
+    <p>Another major tenant that this website is based on is <a href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson's law</a>. In a nutshell, Parkinson's law basically states that a specific task will be completed by the deadline set to finish it by. If you have a week to write a five page term paper, it will be completed in a week. If you have two days to write a five page term paper, it will be written in two days. This table asks you to give the total amount of hours it will take to complete a goal, and then it asks you for a deadline. As long as the total amount of hours and and deadline is <em>reasonable</em>, there is a very good chance you will complete the task. That said, it can be a bit tricky to without external motivators. But, provided you have enough self-motivation, you should be able to acheive your goals within the timeframe you set.</p>
+    <p>Everytime you work for the timelimit, you can add a pomodoro to the table for that day, along with a task name, and notes you may want to add. It may be easier to work for several pomodoros and then add them all at once. Take a look at the table below to see an example.</p>
+    <h3 id="2">Creating and Using a Table</h3>
+    <p>
+        Creating a table is easy, simply click the "create new table" button on the load page to trigger a drop down form that is pretty self-explanatory. 
+        <ul>
+            <li><strong>new table name</strong> - the table name basically works like a username on other sites. The name must be unique and is paired with a password you choose.</li>
+            <li><strong>password / confirm password</strong> - choose a password that's secure, but one that you can also remember. Currently, there is no password recovery feature, as of version 1.0. So, better yet, write your password down after you create it.</li>
+        </ul>
+    </p>
+    <h4 id="2.1">How to Create a New Table</h4>
+    <h4 id="2.2">Viewing the Data Table</h4>
+    <img id="how-to-pic" src="/static/how-to-use-1.jpg" alt="sample Pomo Progress! table">
+    <div class="how-to-table">
+    <p><strong>Date</strong>-the date of your most recent entry. Multiple entries on the same date will be combined into one entry. Multiple tasks and notes can be added to the same date.</p>
+    <p><strong>Pomodoros</strong>-shows the amount of pomodoros you accumulated for a given date. After 7 days, the daily amounts of pomodoros are added together for a weekly total.</p>
+    <p><strong>Task(s)</strong>-lists what you focused on for the day, can have more than one task for a given day.</p>
+    <p><strong>Notes</strong>-you have the option to add a short note each time you add more pomodoros to the table. <em>please keep the notes as brief as possible, a new notes system is being worked out for the next version</em></p>
+    <p>If you want to add new notes or tasks <em>without</em> adding pomodoros, you can just put a '0' in that field and then write in the task and/or notes you want to add to that day.</p>
+    </div>
+
+    <div class="clr"></div>
+
+    <div class="third-chunk">
+    <h3 id="3">Other Features</h3>
+    <p>Another notable feature is the journal page, which will allow you to type out and save your thoughts about your journey without any character limit. Journaling and planning out your progress step-by-step should help you realize and make progress towards your goal, especially if the goal is something rather vague and complex, like making a career change over the next year or two.</p>
+    
+    <h4 id="3.1">Thanks!</h4>
+    <p>This started out as my final project for Harvard's online version of CS50, and that's the ultimate reason for its existence. As I've worked on it though, I've become attached to it, and it's definitely something I'll continue to use into the future. I'm not really expecting it to catch on in any way, as there are much more comprehensive progress trackers out there, but if anyone else does start using it and finds their way to the bottom of this page, this is a thank you for using my webapp, I put a lot of work into it, and it's awesome and amazing that other people are getting use out of it.</p>
+    </div>
+    <footer id="footer">
+    <em>Pomo Progress is not affliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
+    <br>
+    version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a>
+    </footer>
+</section>
 {% endblock %}
