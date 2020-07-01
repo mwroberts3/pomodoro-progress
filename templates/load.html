@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="load" style="margin: auto;">    
+<div class="load">    
     <center>
     <h3>Load Table</h3>
     <form action="/" method="post">
@@ -37,14 +37,14 @@
             <div id="new_table_display"></div>
             <script>
                 document.querySelector('#new_table').onclick = function(){
-                document.querySelector('#new_table_display').outerHTML = '<br><br>choose a name and password for your new table:<div><input class="wide-form" autocomplete="off" name="new_table_name" placeholder="new table name" type="text" required></div><br><div><input class="wide-form" autocomplete="off" name="new_password" placeholder="password" type="password" required>&nbsp;<input class="wide-form" autocomplete="off" name="confirm_password" placeholder="confirm password" type="password" required></div><br>What goal do you want to track your progress in?<div><textarea class="no-outline" name="purpose" row="4" col="50" placeholder="what is your goal?"></textarea></div><br>In how many hours do you want to acheive this goal?<div><input class="wide-form" autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>When do you want to complete this goal by?<br><div><input class="wide-form" autocomplete="off" name="time_frame" type="date"></div><br>Set the time interval for reps<div><input class="wide-form" autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" class="load-create" name="create" value="create"></div>';}
+                document.querySelector('#new_table_display').outerHTML = '<br><br>choose a name and password for your new table:<div><input class="wide-form" autocomplete="off" name="new_table_name" placeholder="new table name" type="text" required></div><br><div><input class="wide-form pword-spacing" autocomplete="off" name="new_password" placeholder="password" type="password" required>&nbsp;<input class="wide-form" autocomplete="off" name="confirm_password" placeholder="confirm password" type="password" required></div><br>What goal do you want to track your progress in?<div><textarea class="no-outline" name="purpose" row="4" col="50" placeholder="what is your goal?"></textarea></div><br>In how many hours do you want to acheive this goal?<div><input class="wide-form" autocomplete="off" name="hours_goal" placeholder="hours goal" type="text"></div><br>When do you want to complete this goal by?<br><div><input class="wide-form" autocomplete="off" name="time_frame" type="date"></div><br>Set the time interval for reps<div><input class="wide-form" autocomplete="off" name="tomato_setting" placeholder="minutes per pomodoro" type="text"></div><br><div><input type="submit" class="load-create" name="create" value="create"></div>';}
             </script>
         </div>  
     </center>  
     </form>
 </div>
 <footer id="footer" class="load">
-    <em>Pomo Progress is not affliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
+    <em>Pomo Progress is not affiliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
     <br>
     version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a>
 </footer>

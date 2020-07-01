@@ -1,8 +1,34 @@
-/* Main Style */
+/* Load */
+.pword-spacing {
+    margin-left: 10px;
+}
+
+/* First Entry */
+#first-entry {
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#first-entry input {
+    margin-bottom: 10px;
+    width: 95%;
+}
+
+#first-entry .fe-pomos, #first-entry .mobile-btn {
+    width: 40%;
+}
+
+.wide-form::placeholder {
+    text-align: center;
+}
 
 /* Home (table view)*/
 #add-pomos .separation-for-smaller {
     display: block;
+    text-align: left;
 }
 
 #add-pomos .separation-for-smaller label[for="task"] {
@@ -21,7 +47,7 @@
     max-width: 100%;
     margin-top: 5px;
     padding: 0;
-    max-height: 100vh;
+    max-height: 75vh;
     overflow: auto;
 }
 
@@ -48,7 +74,7 @@
 /* Footer */
 #footer.home {
     position: absolute;
-    bottom: -130%;
+    bottom: -105%;
     left: 0;
     right: 0;
 }

@@ -1,8 +1,8 @@
 # Pomo Progress!
 ## Purpose 
-Started as final project for CS50 and turned into a tool I'll probably keep using and building for the forseeable future. It is a way to track data regarding advancement towards a goal. It's based on the Pomodoro Technique&trade;, but could really apply to anytype of task that requires repetition. 
+Started as final project for CS50 and turned into a tool I'll probably keep using and building for the foreseeable future. It is a way to track data regarding advancement towards a goal, short or long term. It's based on the Pomodoro Technique&trade;, but could really apply to any type of task that requires repetition. 
 
-Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! is more concerned and aimed at helping individuals acheive longer term goals. 
+Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! is more concerned and aimed at helping individuals achieve longer term goals. 
 
 ## Current Version Information ##
 **Version:** 1.0<br>
@@ -16,10 +16,10 @@ Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! 
 ## Usage ##
 1. ### Users create a new table on the first page of website
     1. asks users to pick a table name (basically username) and a password.
-    2. asks users to define the goal they're trying to acheive<br>
+    2. asks users to define the goal they're trying to achieve<br>
         eg. _weight loss_
-    3. asks users how many hours it will take to acheive this goal
-    4. asks users to choose a deadline by which they want to acheive this goal
+    3. asks users how many hours it will take to achieve this goal
+    4. asks users to choose a deadline by which they want to achieve this goal
     5. final input asks users to set the amount of time for each rep (based on the Pomodoro Technique&trade;)
 2. ### Users are asked to input their first entry
     1. each row in the table takes four values, **date**, **pomodoro count**, **task(s)**, and **notes**
@@ -31,27 +31,29 @@ Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! 
     4. basic information about the table is shown in the left-hand column and more detailed stats are shown in the right-hand column. 
 3. ### More features ###
     1. users can user the journal feature to add long-form thoughts and ideas about their journey
-    2. more funtions to be added in future versions
+    2. more functions to be added in future versions
 ## Support ##
-If your a user with questions or a fellow github user with tech questions, please message the email address below. 
+If your a user with questions or a fellow github user with tech questions, please send a message to the email address below. 
 <br>
 **email:** mwroberts89@gmail.com
 
 ## Roadmap ##
-### Version 1.1 ###
+### Version 1.1 - 1.9 ###
 * allow users to delete their table
-* continued ui tweeks for better aesthetics and responsiveness
+* continued ui tweaks for better aesthetics and responsiveness
 * rewrite _howtouse.html_ page and make more comprehensive
 * make mention of journal in "Other Features" section of *howtouse.html* a link to the journal. But if there is no login info, need to alert user that they have to login first
 * the table of contents in *howtouse.html* isn't totally usable because the page isn't long enough for the later links to jump to the top of the page
-### Beyond 1.1 ###
+* optimize *howtouse.html* for smaller screens
+* should add more stats like, "longest streak" and "weekly average"
+### Beyond version 1.x ###
 * add way for users to download their tables
 * embedded timer
 * have results load up to 10 weeks and then have a link to show more
 * add way to view a chart that shows a user's progress
 * some kind of custom styling if a day's pomo count is higher than the necessary average
-* a way to search table parameters and display charts, eg. days over x amount of tomatoes, rank days from least to most
+* a way to search table parameters and display charts, eg. days over x amount of tomatoes, rank days from least to most, maybe call it 'reports' or something and add the link to the navbar on the home page
 ### License ###
-As of June 28, 2020, not sure what license I will be using, but I want to be open source and allow for contributions.
+As of June 28, 2020, not sure what license I will be using, but I want it to be open source and allow for contributions.
 ### Contributing ###
-If you're a web development interested in contributing to Pomo Progress! Send me an email to discuss.
+If you're a beginner web developer interested in contributing and collaborating, send me an email to discuss.
