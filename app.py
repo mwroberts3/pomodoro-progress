@@ -90,7 +90,7 @@ def load():
                 session['start_date'] = saved_tables[0]['start_date']
                 session['tomato_rate'] = saved_tables[0]['tomato_rate']
 
-                # converts the time_frame string into individual years, months and days elements
+                # calculates the amount of days until deadline is reached
                 session['days_until_deadline'] = deadline_conversion(session['time_frame'], session['start_date'])
 
                 # finds the current number of days until you reach deadline
@@ -104,6 +104,7 @@ def load():
                     db.execute("UPDATE tables SET time_frame =:time_frame WHERE id=:id", time_frame = time_frame_insert, id = session['table_id'])
                 else:
                     session['time_frame'] = datetime.strptime(session['time_frame'], '%Y-%m-%d')
+
                 session['time_frame'] = session['time_frame'].strftime('%b %d, %Y')   
                 session['start_date'] = datetime.strptime(session['start_date'], '%Y-%m-%d')
                 session['start_date'] = session['start_date'].strftime('%b %d, %Y')     
