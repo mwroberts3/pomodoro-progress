@@ -31,8 +31,15 @@
     text-align: left;
 }
 
-#add-pomos .separation-for-smaller label[for="task"] {
-    margin-left: 20px;
+#add-pomos label {
+    display: block;
+    text-align: center;
+}
+
+#add-pomos input {
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
 }
 
 .left {
@@ -59,6 +66,7 @@
 
 .mobile-link {
     display: block;
+    margin-bottom: 20px;
 }
 
 /* width */
@@ -73,8 +81,5 @@
 
 /* Footer */
 #footer.home {
-    position: absolute;
-    bottom: -105%;
-    left: 0;
-    right: 0;
+    position: static;
 }
