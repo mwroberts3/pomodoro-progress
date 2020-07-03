@@ -1,0 +1,13 @@
+THINGS TO FIX:
+-looks like there might be a character limit per entry to js alert(notes). I think I can still launch with notes like this, but will need a better system in the first update
+
+-textarea input in /journal, enter doesn't submmit and empty spaces are erased after submitting
+
+POSSIBLE version x.x FEATURES:
+-add way for users to download their tables
+-timer?
+-have results load up to 10 weeks and then have a link to show more
+-add way to view a chart that shows a user's progress
+-some kind of custom styling if a day's pomo count is higher than the necessary average
+-maybe make a version history link on load page...maybe only if i make significant changes after launching
+-a way to search table parameters and display charts, eg. days over x amount of tomatoes, rank days from least to most
