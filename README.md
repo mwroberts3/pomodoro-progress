@@ -46,6 +46,7 @@ If your a user with questions or a fellow github user with tech questions, pleas
 * the table of contents in *howtouse.html* isn't totally usable because the page isn't long enough for the later links to jump to the top of the page
 * optimize *howtouse.html* for smaller screens
 * should add more stats like, "longest streak" and "weekly average"
+* not sure how to get favicon.ico working, need to do more research. Just using a .png image for now
 ### Beyond version 1.x ###
 * add way for users to download their tables
 * embedded timer
