@@ -1,149 +1,207 @@
-{% extends 'base.html' %}
-
-{% block title %}Pomo Progress! - {{ session['table_name'] }}{% endblock %}
-
-{% block header %}
+{% extends 'base.html' %} {% block title %}Pomo Progress! - {{
+session['table_name'] }}{% endblock %} {% block header %}
 <div id="home-header">
-    <div class="navlinks">
-        <a href="/">logout</a> | <a href="/journal">journal</a>
-    </div>
-    <img class="basic-reponsive" src="/static/home-banner.jpg" alt="Pomo Progress!">
-    <br>
+  <div class="navlinks">
+    <a href="/">logout</a> | <a href="/journal">journal</a>
+  </div>
+  <img
+    class="basic-reponsive"
+    src="/static/home-banner.jpg"
+    alt="Pomo Progress!"
+  />
+  <br />
 </div>
-{% endblock %}
-
-{% block main %}
+{% endblock %} {% block main %}
 <center>
-    <form id="add-pomos" action="/home" method="post">
-        <div class="separation-for-smaller">
-            <label for="pomos">Pomodoros:</label>
-            <input class="wide-form" name="tomatoes" placeholder="pomodoro count" type="number" required>
-            <label for="task">Task:</label>
-            <input class="wide-form" name="task" placeholder="primary task" type="text">
-        </div>
-        <label for="notes">Notes:</label>
-        <input class="wide-form" name="notes" placeholder="notes or secondary tasks" type="text">
-        <input class="load-create" type="submit">
-    </form>
+  <form id="add-pomos" action="/home" method="post">
+    <div class="separation-for-smaller">
+      <label for="pomos">Pomodoros:</label>
+      <input
+        class="wide-form"
+        name="tomatoes"
+        placeholder="pomodoro count"
+        type="number"
+        required
+      />
+      <label for="task">Task:</label>
+      <input
+        class="wide-form"
+        name="task"
+        placeholder="primary task"
+        type="text"
+      />
+    </div>
+    <label for="notes">Notes:</label>
+    <input
+      class="wide-form"
+      name="notes"
+      placeholder="notes or secondary tasks"
+      type="text"
+    />
+    <input class="load-create" type="submit" />
+  </form>
 </center>
-    <hr>
+<hr />
 <div id="info" class="left">
-        <strong><q>{{ session['table_name'] }}</q></strong>
-        <br>
-        {{ session['start_date'] }}
-        <br>
-        <br>
-        <strong>Purpose:</strong> 
-        <br>
-        {{ session['purpose'] }}
-        <br>
-        <br>
-        <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
-        <br>
-        <strong>Pomodoro Timer:</strong> {{ session['tomato_rate'] }} min
-        <br>
-        <br>
-        <strong>Deadline:</strong> {{ session['time_frame'] }}
-        <br>
-        <strong>Days Until Deadline:</strong> {{ session['current_days_until_deadline']}}
-        <br>
-        <br>
-        <p><em><strong>Time zone notice:</strong> As of version 1.0, the time zone is set to North America Pacific Standard Time. A fix that allows users to set their own local time zone will be added asap. Stayed tuned for details, sorry for any inconvenience.</em></p>
-        <p><em>If you need to have corrections made to your table, please <a href="mwroberts89@gmail.com">email me</a> the details and they will be corrected.</em></p>
-        <br>
-        <br>
-        <span class="mobile-link"><a href="#stats">view stats</a></span>
+  <strong><q>{{ session['table_name'] }}</q></strong>
+  <br />
+  {{ session['start_date'] }}
+  <br />
+  <br />
+  <strong>Purpose:</strong>
+  <br />
+  {{ session['purpose'] }}
+  <br />
+  <br />
+  <strong>Hourly Goal:</strong> {{ session['hours_goal'] }} hours
+  <br />
+  <strong>Pomodoro Timer:</strong> {{ session['tomato_rate'] }} min
+  <br />
+  <br />
+  <strong>Deadline:</strong> {{ session['time_frame'] }}
+  <br />
+  <strong>Days Until Deadline:</strong> {{
+  session['current_days_until_deadline']}}
+  <br />
+  <br />
+  <p>
+    <em
+      ><strong>Time zone notice:</strong> As of version 1.0, the time zone is
+      set to North America Pacific Standard Time. A fix that allows users to set
+      their own local time zone will be added asap. Stayed tuned for details,
+      sorry for any inconvenience.</em
+    >
+  </p>
+  <p>
+    <em
+      >If you need to have corrections made to your table, please
+      <a href="mwroberts89@gmail.com">email me</a> the details and they will be
+      corrected.</em
+    >
+  </p>
+  <br />
+  <br />
+  <span class="mobile-link"><a href="#stats">view stats</a></span>
 </div>
 <div class="middle">
-    <table>
-        <th>Date</th>
-        <th>Pomodoros</th>
-        <th>Task(s)</th>
-        <th>Notes</th>
-        <tr> 
-            {% if day_count > 0 %}
-                <td class="week week-solid">#{{ week_count + 1 }}</td>
-                <td class="week week-solid">Total: {{ tomato_total }}</td>
-                <td class="week week-solid" colspan="2">Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}</td>
-            {% endif %}
-            {% if day_count == 0 %}
-                <!--if it has been exactly a week, do not display anything for upcoming week-->
-            {% endif %}
-        </tr>
-        {% for row in full_chart|reverse %}
-            <tr>
-                {% if row['date']|float >= 1 %}
-                    <td class="week week-solid">#{{ row['date'] }}</td>
-                    <td class="week week-solid">Total: {{ row['tomato_count'] }}</td>
-                    <td class="week week-solid" colspan="2">Avg: {{ row['task'] }}</td>
-                {% else %}
-                    {% if row['tomato_count']|int >= 10 %}    
-                        <td>{{ row['display_date'] }}</td>
-                        <td class="pomos10">{{ row['tomato_count'] }}</td>
-                        {% if row['task'] != None and row['task'] != "" %}
-                            <td>{{ row['task'] }}</td>
-                        {% else %}
-                            <td>-</td>
-                        {% endif %}                            
-                        {% if row['notes'] != None and row['notes'] != "" %}
-                            <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
-                        {% else %}
-                            <td>-</td>   
-                        {% endif %}
-                    {% else %}
-                        <td>{{ row['display_date'] }}</td>
-                        <td class="pomos">{{ row['tomato_count'] }}</td>
-                        {% if row['task'] != None and row['task'] != "" %}
-                            <td>{{ row['task'] }}</td>
-                        {% else %}
-                            <td>-</td>
-                        {% endif %}   
-                        {% if row['notes'] != None and row['notes'] != "" %}
-                            <td><button class="notes" type="button" onclick="alert('{{ row['notes'] }}')">notes</button></td>
-                        {% else %}
-                            <td>-</td>   
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+  <table>
+    <th>Date</th>
+    <th>Pomodoros</th>
+    <th>Task(s)</th>
+    <th>Notes</th>
+    <tr>
+      {% if day_count > 0 %}
+      <td class="week week-solid">#{{ week_count + 1 }}</td>
+      <td class="week week-solid">Total: {{ tomato_total }}</td>
+      <td class="week week-solid" colspan="2">
+        Avg: {{ (tomato_total/day_count)|round(2, 'floor') }}
+      </td>
+      {% endif %} {% if day_count == 0 %}
+      <!--if it has been exactly a week, do not display anything for upcoming week-->
+      {% endif %}
+    </tr>
+    {% for row in full_chart|reverse %}
+    <tr>
+      {% if row['date']|float >= 1 %}
+      <td class="week week-solid">#{{ row['date'] }}</td>
+      <td class="week week-solid">Total: {{ row['tomato_count'] }}</td>
+      <td class="week week-solid" colspan="2">Avg: {{ row['task'] }}</td>
+      {% else %} {% if row['tomato_count']|int >= 10 %}
+      <td>{{ row['display_date'] }}</td>
+      <td class="pomos10">{{ row['tomato_count'] }}</td>
+      {% if row['task'] != None and row['task'] != "" %}
+      <td>{{ row['task'] }}</td>
+      {% else %}
+      <td>-</td>
+      {% endif %} {% if row['notes'] != None and row['notes'] != "" %}
+      <td>
+        <button class="notes" type="button">notes</button>
+        <div class="notes-overlay">
+          <div class="notes-container">
+            <div class="close-notes">x</div>
+            <div class="notes-themself">
+              {{ row['notes'] }}
+            </div>
+          </div>
+        </div>
+      </td>
+      {% else %}
+      <td>-</td>
+      {% endif %} {% else %}
+      <td>{{ row['display_date'] }}</td>
+      <td class="pomos">{{ row['tomato_count'] }}</td>
+      {% if row['task'] != None and row['task'] != "" %}
+      <td>{{ row['task'] }}</td>
+      {% else %}
+      <td>-</td>
+      {% endif %} {% if row['notes'] != None and row['notes'] != "" %}
+      <td>
+        <button class="notes" type="button">notes</button>
+        <div class="notes-overlay">
+          <div class="notes-container">
+            <div class="close-notes">x</div>
+            <div class="notes-themself">
+              {{ row['notes'] }}
+            </div>
+          </div>
+        </div>
+      </td>
+      {% else %}
+      <td>-</td>
+      {% endif %} {% endif %} {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
 </div>
 
-<div class="right" id="stats"> 
-    <strong>Stats</strong>
-    <br>
-    <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
-    <br>
-    <strong>Daily Average:</strong> {{ stats['daily_average'] }}
-    <br>
-    <strong>Pace:</strong>  
-    {% if stats['pace']['rate'] >= 100 %}
-        <span style="color:rgb(17, 175, 17)"><strong> ~{{ stats['pace']['rate'] }}%</strong> ({{ stats['pace']['on_pace'] }})</span>
-    {% else %}
-        <span style="color: red"><strong> ~{{ stats['pace']['rate'] }}%</strong> ({{ stats['pace']['on_pace'] }})</span>  
-    {% endif %}
-    <br>
-    <br>
-    <details>
-        <summary class="no-outline">More</summary>
-            <br>
-            <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
-            <br>
-            <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
-            <br>
-            <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
-            <br>
-            <br>
-            <strong>Streak:</strong> {{ stats['days_in_a_row'] }} days
-            <br>
-            <strong>One Day Record:</strong> {{ stats['one_day_high'] }}    
-    </details>
-    <span class="mobile-link"><a href="#info">back</a></span>
+<div class="right" id="stats">
+  <strong>Stats</strong>
+  <br />
+  <strong>Total Pomodoros:</strong> {{ stats['total_tomatoes'] }}
+  <br />
+  <strong>Daily Average:</strong> {{ stats['daily_average'] }}
+  <br />
+  <strong>Pace:</strong>
+  {% if stats['pace']['rate'] >= 100 %}
+  <span style="color: rgb(17, 175, 17);"
+    ><strong> ~{{ stats['pace']['rate'] }}%</strong> ({{
+    stats['pace']['on_pace'] }})</span
+  >
+  {% else %}
+  <span style="color: red;"
+    ><strong> ~{{ stats['pace']['rate'] }}%</strong> ({{
+    stats['pace']['on_pace'] }})</span
+  >
+  {% endif %}
+  <br />
+  <br />
+  <details>
+    <summary class="no-outline">More</summary>
+    <br />
+    <strong>Pomodoros to Goal:</strong> {{ stats['pomos_left'] }}
+    <br />
+    <strong>Completion:</strong> {{ stats['completion_percentage'] }}%
+    <br />
+    <strong>Necessary Average:</strong> {{ stats['on_pace_average'] }}
+    <br />
+    <br />
+    <strong>Streak:</strong> {{ stats['days_in_a_row'] }} days
+    <br />
+    <strong>One Day Record:</strong> {{ stats['one_day_high'] }}
+  </details>
+  <span class="mobile-link"><a href="#info">back</a></span>
 </div>
+<script src="/static/notes-display.js"></script>
 <footer id="footer" class="home">
-    <em>Pomo Progress is not affiliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
-    <br>
-  version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a> 
+  <em
+    >Pomo Progress is not affiliated with the Cirillo Company or Francesco
+    Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em
+  >
+  <br />
+  version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> |
+  <a
+    href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md"
+    >info</a
+  >
 </footer>
 {% endblock %}

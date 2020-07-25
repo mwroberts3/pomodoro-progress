@@ -1,56 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
 
 /* Main Styling */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: auto;
-    width: 95%;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1em;
-    line-height: 1.6em;
-    min-height: 100vh;
-    position: relative;
+  margin: auto;
+  width: 95%;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  line-height: 1.6em;
+  min-height: 100vh;
+  position: relative;
 }
 
 a {
-    font-weight: bolder;
-    text-decoration: none;
-    color: rgb(255, 0, 43);
+  font-weight: bolder;
+  text-decoration: none;
+  color: rgb(255, 0, 43);
 }
 
 a:hover {
-    color:rgb(255, 102, 46);
+  color: rgb(255, 102, 46);
 }
 
 p {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 /* Utilities */
 .no-outline:focus {
-    outline: none;
-    border-color: rgb(219, 67, 97);
+  outline: none;
+  border-color: rgb(219, 67, 97);
 }
 
 .basic-responsive {
-    display: inline;
-    max-width: 100%;
+  display: inline;
+  max-width: 100%;
 }
 
 /* Load */
 .header-banner {
-    width: 650px;
-    height: 66px;
+  width: 650px;
+  height: 66px;
 }
 
 .load {
-    /* need to figure out way to center load div */
-    padding: 45px;
-    margin-top: 5%;
-    margin-bottom: 3%;
+  /* need to figure out way to center load div */
+  padding: 45px;
+  margin-top: 5%;
+  margin-bottom: 3%;
 }
 
 /* .load-table {
@@ -60,284 +60,316 @@ p {
 } */
 
 .load-table input {
-    display: block;
+  display: block;
 }
 
 .clr {
-    clear: left;
+  clear: left;
 }
 
 .mobile-link {
-    display: none;
+  display: none;
 }
 
 /* First Entry */
 #first-entry {
-    width: 90%;
-    margin: auto;
-    padding-top: 150px;
+  width: 90%;
+  margin: auto;
+  padding-top: 150px;
 }
 
 #first-entry p {
-    text-align: center;
+  text-align: center;
 }
 
 #first-entry label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* Home (table view)*/
 #home-header .navlinks {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 #home-header img {
-    display: block;
-    max-width: 95%;
-    margin: auto;
+  display: block;
+  max-width: 95%;
+  margin: auto;
 }
 
 #add-pomos label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #add-pomos .separation-for-smaller {
-    display: inline;
+  display: inline;
 }
 
 /* Set width length for the left, right and middle columns */
 .left {
-    float: left;
-    vertical-align: top;
-    /* display: inline-block; */
-    width: 25%;
-    margin-top: 50px;
-    text-align: center;
+  float: left;
+  vertical-align: top;
+  /* display: inline-block; */
+  width: 25%;
+  margin-top: 50px;
+  text-align: center;
 }
 
 .middle {
-    float: left;
-    /* display: inline-block; */
-    max-width: 48%;
-    margin-top: 0;
-    padding: 10px;
-    max-height: 80vh;
-    overflow: auto;
+  float: left;
+  /* display: inline-block; */
+  max-width: 48%;
+  margin-top: 0;
+  padding: 10px;
+  max-height: 80vh;
+  overflow: auto;
 }
 
 .right {
-    float: left;
-    vertical-align: top;
-    /* display: inline-block; */
-    width: 25%;
-    margin-top: 50px;
-    text-align: center;
+  float: left;
+  vertical-align: top;
+  /* display: inline-block; */
+  width: 25%;
+  margin-top: 50px;
+  text-align: center;
 }
 
 details summary {
-    font-weight: bold;
-    width: 100px;
-    margin: auto;
-    cursor: pointer;
+  font-weight: bold;
+  width: 100px;
+  margin: auto;
+  cursor: pointer;
 }
 
 details {
-    width: 100%;
-    cursor: pointer;
+  width: 100%;
+  cursor: pointer;
 }
 
 .middle::-webkit-scrollbar {
-    width: 15px;
-  }
-   
+  width: 15px;
+}
+
 .middle::-webkit-scrollbar-thumb {
-    background: #d53130;
-    border-radius: 10px;
+  background: #d53130;
+  border-radius: 10px;
 }
 
 /* Pomo Table */
 table {
-    /* I think in order for the table to shrink when going to a smaller screen, or shrinking window, the text within the table needs to shrink */
-    max-width: 100%;
-    border: 1px solid rgb(105, 105, 105);
-    border-collapse: collapse;
-    font-size: 1em;
-    background-color: #f8f8f8;
+  /* I think in order for the table to shrink when going to a smaller screen, or shrinking window, the text within the table needs to shrink */
+  max-width: 100%;
+  border: 1px solid rgb(105, 105, 105);
+  border-collapse: collapse;
+  font-size: 1em;
+  background-color: #f8f8f8;
 }
 
 th {
-    color: white;
-    background: black;
-    padding: 4px;
-    padding-bottom: 9px;
-    width: 33%;
-    border: 1px solid black;
-    border-collapse: collapse;
-
+  color: white;
+  background: black;
+  padding: 4px;
+  padding-bottom: 9px;
+  width: 33%;
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
 tr {
-    border: 1px dashed rgb(105, 105, 105);
+  border: 1px dashed rgb(105, 105, 105);
 }
 
 td {
-    /* border: 1px solid black; */
-    padding: 4px;
-    text-align: center;
-    width: 33%;
+  /* border: 1px solid black; */
+  padding: 4px;
+  text-align: center;
+  width: 33%;
 }
 
 .week {
-    color: white;
-    background: rgb(39, 39, 39);
-    font-weight: bold;
+  color: white;
+  background: rgb(39, 39, 39);
+  font-weight: bold;
 }
 
 .week-solid {
-    border-bottom: 1px solid rgb(105, 105, 105);
-    border-top: 1px solid rgb(105, 105, 105);
+  border-bottom: 1px solid rgb(105, 105, 105);
+  border-top: 1px solid rgb(105, 105, 105);
 }
 
 .pomos {
-    background: rgb(39, 39, 39);
-    font-weight: bold;
-    color: white;
+  background: rgb(39, 39, 39);
+  font-weight: bold;
+  color: white;
 }
 
 .pomos10 {
-    background: rgb(39, 39, 39);
-    font-weight: bold;
-    font-style: italic;
-    color: rgb(255, 220, 21);    
+  background: rgb(39, 39, 39);
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(255, 220, 21);
+}
+
+/* Notes */
+.notes-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.notes-container {
+  margin: 300px auto;
+  width: 100%;
+  max-width: 300px;
+  background: #fff;
+  position: relative;
+  border-radius: 10px;
+}
+
+.close-notes {
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.notes-themself {
+  padding: 20px;
+  text-align: left;
 }
 
 /* Buttons and Input Fields */
 .notes {
-    font-family: 'Courier New', Courier, monospace;
-    border: none;
-    color: rgb(255,0,43);
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    font-size: 0.75em;
-    cursor: pointer;
-    background-color: #f8f8f8;
+  font-family: "Courier New", Courier, monospace;
+  border: none;
+  color: rgb(255, 0, 43);
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.75em;
+  cursor: pointer;
+  background-color: #f8f8f8;
 }
 
 .wide-form {
-    width: 175px;
-    padding: 5px;
-    margin-bottom:8px;
-    border: 1px solid rgb(131, 131, 131);
-    border-radius: 4px;
+  width: 175px;
+  padding: 5px;
+  margin-bottom: 8px;
+  border: 1px solid rgb(131, 131, 131);
+  border-radius: 4px;
 }
 
 .wide-form:focus {
-    outline: none;
-    border-color: rgb(218, 44, 79);
+  outline: none;
+  border-color: rgb(218, 44, 79);
 }
 
 .load-create {
-    padding: 3px 7px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 1.1em;
-    cursor: pointer;
-    color: rgb(255,0,43);
-    background-color:  rgb(224, 224, 224);
-    border: 1px solid rgb(131, 131, 131);
-    border-radius: 7px;
+  padding: 3px 7px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+  color: rgb(255, 0, 43);
+  background-color: rgb(224, 224, 224);
+  border: 1px solid rgb(131, 131, 131);
+  border-radius: 7px;
 }
 
 .load-create:hover {
-    background-color: rgb(235, 235, 235);
+  background-color: rgb(235, 235, 235);
 }
 
 .load-create:focus {
-    outline: none;
-    border-color: rgb(218, 44, 79);
+  outline: none;
+  border-color: rgb(218, 44, 79);
 }
 
 textarea {
-    height: 20vh;
-    width: 50vw;
-    border: 1px solid rgb(131, 131, 131);
-    border-radius: 7px;
-  }
+  height: 20vh;
+  width: 50vw;
+  border: 1px solid rgb(131, 131, 131);
+  border-radius: 7px;
+}
 
 textarea:focus {
-    outline: none;
-    border-color: rgb(218, 44, 79);
+  outline: none;
+  border-color: rgb(218, 44, 79);
 }
 
 /* Journal */
 .journal {
-    width: 80%;
-    text-align: justify;
+  width: 80%;
+  text-align: justify;
 }
 
 /* How to Use this Site */
 #how-to-pic {
-    border: 2px solid #999; 
-    float: right; 
-    display: block; 
-    margin-left: 25px; 
-    max-width: 409px;
+  border: 2px solid #999;
+  float: right;
+  display: block;
+  margin-left: 25px;
+  max-width: 409px;
 }
 
-#howtouse h3, h4 {
-    margin: 0;
-    margin-top: 20px;
-    margin-bottom: 5px;
+#howtouse h3,
+h4 {
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 #howtouse .no-list-style {
-    list-style: none;
+  list-style: none;
 }
 
 #howtouse p {
-    text-align: justify;
-    margin-left: 20px;
+  text-align: justify;
+  margin-left: 20px;
 }
 
 #howtouse #how-to-contents {
-    width: 50%;
-    margin: auto;
+  width: 50%;
+  margin: auto;
 }
 
 #howtouse #how-to-contents h3 {
-    text-align: center
-    ;
+  text-align: center;
 }
 
 tip-notice {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 /* Footer */
 #footer {
-    text-align: center;
-    width: 100%; 
-    font-size: 0.72rem;
-    margin: auto;
+  text-align: center;
+  width: 100%;
+  font-size: 0.72rem;
+  margin: auto;
 }
 
 #footer.load {
-    position: static;
+  position: static;
 }
 
 #footer.first-entry {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #footer.home {
-    position: absolute;
-    bottom: -12%;
-    left: 0;
-    right: 0;
+  position: absolute;
+  bottom: -12%;
+  left: 0;
+  right: 0;
 }
