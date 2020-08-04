@@ -38,6 +38,8 @@ session['table_name'] }}{% endblock %} {% block header %}
       placeholder="notes or secondary tasks"
       type="text"
     />
+    <input class="date-insert" name="date" type="text" />
+    <input class="date-displayed-insert" name="date-displayed" type="text" />
     <input class="load-create" type="submit" />
   </form>
 </center>
@@ -62,23 +64,6 @@ session['table_name'] }}{% endblock %} {% block header %}
   <br />
   <strong>Days Until Deadline:</strong> {{
   session['current_days_until_deadline']}}
-  <br />
-  <br />
-  <p>
-    <em
-      ><strong>Time zone notice:</strong> As of version 1.0, the time zone is
-      set to North America Pacific Standard Time. A fix that allows users to set
-      their own local time zone will be added asap. Stayed tuned for details,
-      sorry for any inconvenience.</em
-    >
-  </p>
-  <p>
-    <em
-      >If you need to have corrections made to your table, please
-      <a href="mwroberts89@gmail.com">email me</a> the details and they will be
-      corrected.</em
-    >
-  </p>
   <br />
   <br />
   <span class="mobile-link"><a href="#stats">view stats</a></span>
@@ -191,7 +176,15 @@ session['table_name'] }}{% endblock %} {% block header %}
   </details>
   <span class="mobile-link"><a href="#info">back</a></span>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js"></script>
 <script src="/static/notes-display.js"></script>
+<script>
+  let entryDate = dateFns.format(new Date(), "YYYY-MM-DD");
+  let entryDateDisplayed = dateFns.format(new Date(), "MM-DD");
+  console.log(entryDate, entryDateDisplayed);
+  document.querySelector(".date-insert").value = entryDate;
+  document.querySelector(".date-displayed-insert").value = entryDateDisplayed;
+</script>
 <footer id="footer" class="home">
   <em
     >Pomo Progress is not affiliated with the Cirillo Company or Francesco

@@ -78,7 +78,7 @@ def load():
 
             else:    
                 # inserts new table name, with automatic id into tables table
-                db.execute("INSERT INTO tables (table_name, table_password, purpose, hours_goal, time_frame, start_date, tomato_rate) VALUES (?, ?, ?, ?, ?, date('now','localtime'), ?)", request.form.get("new_table_name"), request.form.get("new_password"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("tomato_setting"))
+                db.execute("INSERT INTO tables (table_name, table_password, purpose, hours_goal, time_frame, start_date, tomato_rate) VALUES (?, ?, ?, ?, ?, ?, ?)", request.form.get("new_table_name"), request.form.get("new_password"), request.form.get("purpose"), request.form.get("hours_goal"), request.form.get("time_frame"), request.form.get("date"), request.form.get("tomato_setting"))
 
                 # pull up newly created table's ID and save to session list
                 saved_tables = db.execute("SELECT * FROM tables WHERE table_name=:table_name", table_name=request.form.get("new_table_name"))
@@ -176,7 +176,7 @@ def home():
 
                 date_diff -= 1
 
-            db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, date('now','localtime'), strftime('%m-%d','now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
+            db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, ?, ?, ?, ?, ?)", session['table_id'], request.form.get('date'), request.form.get('date-displayed'), request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
             return redirect('/home')
 
 

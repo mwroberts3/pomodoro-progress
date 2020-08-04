@@ -41,8 +41,15 @@
             </script> 
         </div>  
     </center>  
+    <input class="date-insert" name="date" type="text" />
     </form>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js"></script>
+<script>
+  let entryDate = dateFns.format(new Date(), "YYYY-MM-DD");
+  console.log(entryDate);
+  document.querySelector(".date-insert").value = entryDate;
+</script>
 <footer id="footer" class="load">
     <em>Pomo Progress is not affiliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
     <br>
