@@ -58,7 +58,11 @@ If your a user with questions or a fellow github user with tech questions, pleas
 
 **Notes** - javascript alert notes have been replaced by a simple popup feature, which should cut down on any glitches or bugs, plus it looks cleaner and more a part of the website.
 
--TO TAKE LOCAL TIME DATE, since javascript is javabased, maybe I can use a js date/time method to get current date that the user is entering information, in their own local time, without having to save to the sql database
+-TO TAKE LOCAL TIME DATE, since javascript is webbased, maybe I can use a js date/time method to get current date that the user is entering information, in their own local time, without having to save to the sql database
+
+-Maybe I should get rid of journal feature, it seems with the new notes functionality, there won't really be an issue with note getting cut off because of notes length. I don't really see anyone using the journal feature
+
+-need to center content on first entry page
 
 ### Version 1.4
 

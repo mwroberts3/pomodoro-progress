@@ -40,6 +40,11 @@ p {
   max-width: 100%;
 }
 
+.date-insert,
+.date-diplayed-insert {
+  display: none;
+}
+
 /* Load */
 .header-banner {
   width: 650px;

@@ -241,7 +241,7 @@ def home():
 def firstentry():
     if request.method == "POST":
         db = SQL("sqlite:///pomodoro.db")
-        db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, date('now','localtime'), strftime('%m-%d','now','localtime'), ?, ?, ?)", session['table_id'], request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
+        db.execute("INSERT INTO daily_history (table_id, date, display_date, tomato_count, task, notes) VALUES(?, ?, ?, ?, ?, ?)", session['table_id'], request.form.get('date'), request.form.get('date-displayed'), request.form.get('tomatoes'), request.form.get('task'), request.form.get('notes'))
         return redirect('/home')
 
     else:
