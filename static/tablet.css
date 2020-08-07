@@ -1,73 +1,82 @@
 /* First Entry */
 #first-entry {
-    height: 75vh;
-    padding-top: 25px;
-    display: flex;
-    flex-direction: column;
-    /* flex-wrap: wrap; */
-    align-items: center;
-    justify-content: center;
+  height: 75vh;
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
 }
 
 #first-entry input {
-    width: 40%;
+  text-align: center;
+  width: 40%;
 }
 
 #first-entry .fe-pomos {
-    width: 25%;
+  width: 25%;
 }
 
 #first-entry .mobile-btn {
-    width: 20%;
+  width: 20%;
 }
 
 .wide-form::placeholder {
-    text-align: center;
+  text-align: left;
 }
 
 /* Load */
 .load {
-    padding: 20px;
-    margin-top: 1%;
+  padding: 20px;
+  margin-top: 1%;
 }
 
 /* Home (table view)*/
 #add-pomos .separation-for-smaller {
-    display: block;
+  display: block;
 }
 
-    .left {
-        float: left;
-        vertical-align: top;
-        /* display: inline-block; */
-        width: 25%;
-        margin-top: 0;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    
-    .middle {
-        float: right;
-        /* display: inline-block; */
-        max-width: 74%;
-        margin-top: 0;
-        padding: 10px;
-        max-height: 180vh;
-        overflow: auto;
-    }
-    
-    .right {
-        float: none;
-        vertical-align: top;
-        /* display: inline-block; */
-        width: 25%;
-        margin-top: 50px;
-        text-align: center;
-    }
+.left {
+  float: left;
+  vertical-align: top;
+  /* display: inline-block; */
+  width: 25%;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-align: left;
+}
 
-    #footer.load {
-        position: relative;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
+.middle {
+  float: right;
+  /* display: inline-block; */
+  max-width: 74%;
+  margin-top: 0;
+  padding: 10px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+/* displays more of the table on mobile screens with horizontal view */
+@media only screen and (max-height: 600px) {
+  .middle {
+    max-height: 200vh;
+  }
+}
+
+.right {
+  float: none;
+  vertical-align: top;
+  /* display: inline-block; */
+  width: 25%;
+  margin-top: 50px;
+  padding-left: 0;
+  text-align: left;
+}
+
+#footer .load {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

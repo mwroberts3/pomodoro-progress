@@ -1,41 +1,58 @@
-{% extends 'base.html' %}
-
-{% block title %}Pomo Progress{% endblock %}
-
-{% block header %}
-    <a href='/home'>back</a>
-    <center><h3>{{ session['table_name'] }} - journal</h3></center>
-    {% for message in get_flashed_messages() %}
-        <center><strong>{{ message }}</strong></center>
-    {% endfor %}
-{% endblock %}
-
-{% block main %}
+{% extends 'base.html' %} {% block title %}Pomo Progress{% endblock %} {% block
+main %}
+<a href="/home">back</a>
+<center><h3>{{ session['table_name'] }} - journal</h3></center>
+{% for message in get_flashed_messages() %}
+<center><strong>{{ message }}</strong></center>
+{% endfor %}
 <center>
-    <form action="/journal" method="post">
-        <textarea class="entry" name="entry" placeholder="new journal entry..." type="text" required></textarea>
-        <br>
-        <input class="load-create" name="submit_entry" value="submit new entry" type="submit">
-    </form>
-    <hr>
+  <form action="/journal" method="post">
+    <textarea
+      class="entry"
+      name="entry"
+      placeholder="new journal entry..."
+      type="text"
+      required
+    ></textarea>
+    <br />
+    <input
+      class="load-create"
+      name="submit_entry"
+      value="submit new entry"
+      type="submit"
+    />
+  </form>
+  <hr />
 </center>
 <center>
-        <div class="journal">
-            {% for row in journal_data %}
-                {% if row['date'] != '' %}
-                    <dt><strong>{{ row['date'] }}</strong></dt>
-                    <dd><strong><font size="3px">{{ row['time'] }}&nbsp;-&nbsp;</font></strong>{{ row['entry'] }}</dd>
-                    <br>
-                {% else %}
-                    <dd><strong><font size="3px">{{ row['time'] }}&nbsp;-&nbsp;</font></strong>{{ row['entry'] }}</dd>
-                    <br>
-                {% endif %}
-            {% endfor %}
-        </div>
+  <div class="journal">
+    {% for row in journal_data %} {% if row['date'] != '' %}
+    <dt><strong>{{ row['date'] }}</strong></dt>
+    <dd>
+      {{ row['entry'] }}
+    </dd>
+    <br />
+    {% else %}
+    <dd>
+      {{ row['entry'] }}
+    </dd>
+    <br />
+    {% endif %} {% endfor %}
+  </div>
 </center>
 <footer id="footer">
-    <em>Pomo Progress is not affiliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
-    <br>
-    version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a>
+  version 1.2 2020 &nbsp;
+  <a href="mailto:mwroberts89@gmail.com"
+    ><i class="far fa-envelope fa-2x"></i
+  ></a>
+  &nbsp;
+  <a href="https://github.com/mwroberts3/pomodoro-progress"
+    ><i class="fab fa-github fa-2x"></i
+  ></a>
+  <br />
+  <em
+    >Pomo Progress is not affiliated with the Cirillo Company or Francesco
+    Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em
+  >
 </footer>
 {% endblock %}

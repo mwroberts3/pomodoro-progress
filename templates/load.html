@@ -2,21 +2,18 @@
 
 {% block title %}Pomo Progress! Load or Create New Table{% endblock %}
 
-{% block header %}
-    <div>
-        <center><img class="basic-responsive" src="/static/main-banner.jpg" class="header-banner" alt="Pomo Progress!"></center>
-    </div>
-    <div class="small-text">
-        <center><em>a tool designed to help achieve your goals,
-        based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a></em></center>
-    </div>
-    <hr>
-{% for message in get_flashed_messages() %}
-    <center><strong>{{ message }}</strong></center>
-{% endfor %}
-{% endblock %}
-
 {% block main %}
+<div>
+    <center><img class="basic-responsive" src="/static/main-banner.jpg" class="header-banner" alt="Pomo Progress!"></center>
+</div>
+<div class="small-text dark-gray-font">
+    <center><em>a tool designed to help achieve your goals,
+    based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro Technique</a></em></center>
+</div>
+<hr>
+{% for message in get_flashed_messages() %}
+<center><strong>{{ message }}</strong></center>
+{% endfor %}
 <div class="load">    
     <center>
     <h3>Load Table</h3>
@@ -50,9 +47,19 @@
   console.log(entryDate);
   document.querySelector(".date-insert").value = entryDate;
 </script>
-<footer id="footer" class="load">
-    <em>Pomo Progress is not affiliated with the Cirillo Company or Francesco Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em>
-    <br>
-    version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> | <a href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md">info</a>
+<footer id="footer" class="load dark-gray-font">
+    version 1.2 2020 &nbsp;
+  <a href="mailto:mwroberts89@gmail.com"
+    ><i class="far fa-envelope fa-2x"></i
+  ></a>
+  &nbsp;
+  <a href="https://github.com/mwroberts3/pomodoro-progress"
+    ><i class="fab fa-github fa-2x"></i
+  ></a>
+  <br />
+  <em
+    >Pomo Progress is not affiliated with the Cirillo Company or Francesco
+    Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em
+  >
 </footer>
 {% endblock %}

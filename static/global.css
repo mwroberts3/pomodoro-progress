@@ -29,6 +29,15 @@ p {
   margin-top: 0;
 }
 
+h4 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+h2 {
+  text-align: center;
+}
+
 /* Utilities */
 .no-outline:focus {
   outline: none;
@@ -45,6 +54,10 @@ p {
   display: none;
 }
 
+.dark-gray-font {
+  color: #555;
+}
+
 /* Load */
 .header-banner {
   width: 650px;
@@ -58,11 +71,9 @@ p {
   margin-bottom: 3%;
 }
 
-/* .load-table {
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-} */
+.small-text a {
+  color: #555;
+}
 
 .load-table input {
   display: block;
@@ -81,6 +92,12 @@ p {
   width: 90%;
   margin: auto;
   padding-top: 150px;
+  height: 75vh;
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #first-entry p {
@@ -91,16 +108,39 @@ p {
   font-weight: bold;
 }
 
+#first-entry input {
+  margin-top: 10px;
+}
+
+.fe-mobile-form-container {
+  margin: auto;
+  width: 80%;
+}
+
+.first-entry-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* margin: 10px auto; */
+}
+
 /* Home (table view)*/
 #home-header .navlinks {
-  display: block;
-  margin-bottom: 5px;
+  display: inline;
+  /* margin-bottom: 5px; */
 }
 
 #home-header img {
-  display: block;
-  max-width: 95%;
-  margin: auto;
+  /* display: block; */
+  width: 275px;
+  visibility: hidden;
+  /* margin: auto; */
+}
+
+.table-name-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 #add-pomos label {
@@ -118,7 +158,7 @@ p {
   /* display: inline-block; */
   width: 25%;
   margin-top: 50px;
-  text-align: center;
+  text-align: left;
 }
 
 .middle {
@@ -134,10 +174,15 @@ p {
 .right {
   float: left;
   vertical-align: top;
+  padding-left: 50px;
   /* display: inline-block; */
   width: 25%;
   margin-top: 50px;
-  text-align: center;
+  text-align: left;
+}
+
+.right h4 {
+  margin: 0;
 }
 
 details summary {
@@ -186,10 +231,8 @@ tr {
 }
 
 td {
-  /* border: 1px solid black; */
   padding: 4px;
   text-align: center;
-  width: 33%;
 }
 
 .week {
@@ -205,15 +248,34 @@ td {
 
 .pomos {
   background: rgb(39, 39, 39);
-  font-weight: bold;
+  /* font-weight: bold; */
   color: white;
 }
 
-.pomos10 {
+.pomos-avg {
   background: rgb(39, 39, 39);
   font-weight: bold;
-  font-style: italic;
+  /* font-style: italic; */
   color: rgb(255, 220, 21);
+}
+
+.pomos-avg-double {
+  background: rgb(39, 39, 39);
+  font-weight: bold;
+  /* font-style: italic; */
+  color: rgb(48, 255, 21);
+}
+
+.pomos-avg-lessthan {
+  background: rgb(39, 39, 39);
+  /* font-weight: bold; */
+  /* font-style: italic; */
+  color: rgb(252, 102, 102);
+}
+
+.task-text {
+  font-size: 14px;
+  width: 100%;
 }
 
 /* Notes */
@@ -236,6 +298,12 @@ td {
   border-radius: 10px;
 }
 
+@media only screen and (max-height: 712px) {
+  .notes-container {
+    margin: 100px auto;
+  }
+}
+
 .close-notes {
   font-weight: bold;
   position: absolute;
@@ -245,7 +313,7 @@ td {
 }
 
 .notes-themself {
-  padding: 20px;
+  padding: 0 20px 0px 20px;
   text-align: left;
 }
 
@@ -257,7 +325,7 @@ td {
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  font-size: 0.75em;
+  font-size: 12px;
   cursor: pointer;
   background-color: #f8f8f8;
 }
@@ -328,6 +396,7 @@ h4 {
   margin: 0;
   margin-top: 20px;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 #howtouse .no-list-style {
@@ -361,6 +430,10 @@ tip-notice {
   margin: auto;
 }
 
+#footer a {
+  color: #555;
+}
+
 #footer.load {
   position: static;
 }
@@ -374,7 +447,7 @@ tip-notice {
 
 #footer.home {
   position: absolute;
-  bottom: -12%;
+  bottom: -10%;
   left: 0;
   right: 0;
 }

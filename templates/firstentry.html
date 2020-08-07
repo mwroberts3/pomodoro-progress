@@ -2,7 +2,7 @@
 %} {% block main %}
 <div class="fe-mobile-form-container">
   <form id="first-entry" action="/firstentry" method="post">
-    <p>Please enter first entry:</p>
+    <p>Please enter your first entry:</p>
     <label>Pomodoros:</label>
     <input
       class="fe-pomos wide-form"
@@ -27,7 +27,9 @@
     />
     <input class="date-insert" name="date" type="text" />
     <input class="date-displayed-insert" name="date-displayed" type="text" />
-    <input class="load-create mobile-btn" type="submit" />
+    <div class="first-entry-button">
+      <input class="load-create mobile-btn" type="submit" />
+    </div>
   </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js"></script>
@@ -38,16 +40,19 @@
   document.querySelector(".date-insert").value = entryDate;
   document.querySelector(".date-displayed-insert").value = entryDateDisplayed;
 </script>
-<footer id="footer" class="first-entry">
+<footer id="footer" class="first-entry dark-gray-font">
+  version 1.2 2020 &nbsp;
+  <a href="mailto:mwroberts89@gmail.com"
+    ><i class="far fa-envelope fa-2x"></i
+  ></a>
+  &nbsp;
+  <a href="https://github.com/mwroberts3/pomodoro-progress"
+    ><i class="fab fa-github fa-2x"></i
+  ></a>
+  <br />
   <em
     >Pomo Progress is not affiliated with the Cirillo Company or Francesco
     Cirillo, the sole trademark holder of Pomodoro™ and Pomodoro Technique™</em
-  >
-  <br />
-  version 1.0 2020 | <a href="mailto:mwroberts89@gmail.com">contact</a> |
-  <a
-    href="https://github.com/mwroberts3/pomodoro-progress/blob/master/README.md"
-    >info</a
   >
 </footer>
 {% endblock %}

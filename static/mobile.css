@@ -1,85 +1,101 @@
 /* Load */
 .pword-spacing {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 /* First Entry */
 #first-entry {
-    height: 55vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #first-entry input {
-    margin-bottom: 10px;
-    width: 95%;
+  margin-bottom: 10px;
+  width: 95%;
 }
 
-#first-entry .fe-pomos, #first-entry .mobile-btn {
-    width: 40%;
+#first-entry .fe-pomos,
+#first-entry .mobile-btn {
+  width: 40%;
 }
 
 .wide-form::placeholder {
-    text-align: center;
+  text-align: center;
 }
 
 /* Home (table view)*/
 #add-pomos .separation-for-smaller {
-    display: block;
-    text-align: left;
+  display: block;
+  text-align: left;
 }
 
 #add-pomos label {
-    display: block;
-    text-align: center;
+  display: block;
+  text-align: center;
 }
 
 #add-pomos input {
-    display: block;
-    margin: auto;
-    margin-bottom: 5px;
+  display: block;
+  margin: auto;
+  margin-bottom: 5px;
 }
 
 .left {
-    width: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
-    text-align: center;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 15px;
+  text-align: left;
 }
 
 .middle {
-    display: block;
-    max-width: 100%;
-    margin-top: 5px;
-    padding: 0;
-    max-height: 75vh;
-    overflow: auto;
+  display: block;
+  max-width: 100%;
+  margin-top: 5px;
+  padding: 0;
+  max-height: 75vh;
+  overflow: auto;
 }
 
 .right {
-    width: 100%;
-    margin-top: 0;
-    text-align: center;
+  width: 100%;
+  margin-top: 0;
+  padding: 15px;
+  text-align: left;
 }
 
 .mobile-link {
-    display: block;
-    margin-bottom: 10px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 /* width */
 .middle::-webkit-scrollbar {
-    display: none;
-  }
-   
+  display: none;
+}
+
 /* Handle */
 .middle::-webkit-scrollbar-thumb {
-    display: none;
+  display: none;
+}
+
+/* How to use this site */
+#howtouse #how-to-contents {
+  width: 90%;
+}
+
+#how-to-pic {
+  float: none;
+  margin: auto;
+  max-width: 95vw;
 }
 
 /* Footer */
 #footer.home {
-    position: static;
+  position: static;
 }

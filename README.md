@@ -8,13 +8,13 @@ Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! 
 
 ## Current Version Information
 
-**Version:** 1.0<br>
-**Completion Date:** July 1, 2020<br>
+**Version:** 1.2<br>
 **Creator:** mwroberts3<br>
 **Backend:** Flask<br>
 **Database:** Sqlite, exists as a sole .db file<br>
 **Host:** http://pomoprogress.pythonanywhere.com/<br>
-**Web Launch Date:** July 5, 2020
+**Web Launch Date:** July 5, 2020<br>
+**Current Version Launch Date:** August 7, 2020<br>
 
 ## Usage
 
@@ -43,33 +43,24 @@ If your a user with questions or a fellow github user with tech questions, pleas
 <br>
 **email:** mwroberts89@gmail.com
 
+## Version History
+
+#### Version 1.2 - August 7, 2020
+
+**Notes** - javascript alert notes have been replaced by a simple popup, which should cut down on any glitches or bugs, plus it looks cleaner, and the experience is more seamless.
+
+**Timezone Accuracy** - an entry's input date is now taken from the user's browser with some javascript, rather than previously being dictated by the settings in its wsgi.py file. Rather than integrate this functionality into the journal feature, I've removed the timestamp from the journal and am leaning towards removing the journal altogether. It seems a little redundant in addition to the notes feature.
+
+**Color-Coded Pomo Count Feedback** - pomo count of date that is >= to daily average is yellow, pomo count of date that is >= daily average \* 2 is green, pomo count of date that is <= daily average / 3 is red.
+
 ## Roadmap
-
-### Version 1.2
-
-- allow users to enter timezone so table times are accurate
-- more stats
-  1. longest streak
-  2. weekly average
-- more UI tweaks
-  **Projected Release Date:** August 12th 2020
-
-#### completed changes for version 1.2
-
-**Notes** - javascript alert notes have been replaced by a simple popup feature, which should cut down on any glitches or bugs, plus it looks cleaner and more a part of the website.
-
--TO TAKE LOCAL TIME DATE, since javascript is webbased, maybe I can use a js date/time method to get current date that the user is entering information, in their own local time, without having to save to the sql database
-
--Maybe I should get rid of journal feature, it seems with the new notes functionality, there won't really be an issue with note getting cut off because of notes length. I don't really see anyone using the journal feature
-
--need to center content on first entry page
 
 ### Version 1.4
 
 - add graphing and graph page
   https://www.geeksforgeeks.org/graph-plotting-in-python-set-1/
   https://mpld3.github.io/quickstart.html
-  **Projected Release Date:** Late Summer/Early Fall 2020
+  **Projected Release Date:** Fall 2020
 
 ### Version 1.5 - 1.9
 
