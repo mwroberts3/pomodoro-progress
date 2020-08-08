@@ -51,7 +51,9 @@ If your a user with questions or a fellow github user with tech questions, pleas
 
 **Timezone Accuracy** - an entry's input date is now taken from the user's browser with some javascript, rather than previously being dictated by the settings in its wsgi.py file. Rather than integrate this functionality into the journal feature, I've removed the timestamp from the journal and am leaning towards removing the journal altogether. It seems a little redundant in addition to the notes feature.
 
-**Color-Coded Pomo Count Feedback** - pomo count of date that is >= to daily average is yellow, pomo count of date that is >= daily average \* 2 is green, pomo count of date that is <= daily average / 3 is red.
+**Color-Coded Pomo Count Feedback** - pomo count of date that is >= to daily average is yellow, pomo count of date that is >= double the daily average is green, pomo count of date that is <= daily average / 3 is red.
+
+**UI Tweaks** - some minor UI tweaks that I feel make the site look better, but not really worth mentioning here.
 
 ## Roadmap
 

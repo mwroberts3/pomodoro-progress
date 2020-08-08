@@ -175,13 +175,14 @@ def home():
         previous_date = datetime.strptime(previous_date, "%Y-%m-%d")
 
         # get current date
-        current_date = datetime.today()
+        # CURRENT BUG, NEED TO GET THE CURRENT DATE FROM THE BROWSER, THINK I CAN DO THAT WITH request.form.get("date"), BUT WILL HAVE TO CONVERT STRING INTO DATE 8/7
+        current_date = datetime.strptime(request.form.get("date"), "%Y-%m-%d")
 
         # calculates the number of days between current date and previous entries day
         date_diff = (current_date - previous_date).days
 
         # convert current_date back to date format for GUI purposes
-        current_date = date.today()
+        current_date = request.form.get("date")
 
         # if no days have been skipped, 0 tomato entries do not have to be added, and user can go straight to home page, otherwise entries with '0' tomato counts need to be added for each day missed
         if date_diff == 0:
