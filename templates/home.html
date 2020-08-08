@@ -12,6 +12,7 @@ session['table_name'] }}{% endblock %}
       <div class="separation-for-smaller">
         <label for="pomos">Pomodoros:</label>
         <input
+        id="pomoInput"
           class="wide-form"
           name="tomatoes"
           placeholder="pomodoro count"
@@ -162,7 +163,11 @@ session['table_name'] }}{% endblock %}
   <script>
     let entryDate = dateFns.format(new Date(), "YYYY-MM-DD");
     let entryDateDisplayed = dateFns.format(new Date(), "MM-DD");
+    document.querySelector("#pomoInput").addEventListener("mouseover", () => {
+    entryDate = dateFns.format(new Date(), "YYYY-MM-DD");
+    entryDateDisplayed = dateFns.format(new Date(), "MM-DD");
     console.log(entryDate, entryDateDisplayed);
+    });
     document.querySelector(".date-insert").value = entryDate;
     document.querySelector(".date-displayed-insert").value = entryDateDisplayed;
   </script>
