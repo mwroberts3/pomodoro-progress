@@ -17,7 +17,7 @@ button.forEach((row, index) => {
       popup.style.display = "block";
     }
   });
-  console.log(row[0], button, firstNote);
+  // console.log(row[0], button, firstNote);
 });
 
 close.addEventListener("click", () => {
