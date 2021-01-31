@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, request, abort, flash
-from flask_session import Session
+from flask import Flask, render_template, redirect, request, abort, flash, make_response
+
 from tempfile import mkdtemp
+
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
@@ -8,20 +9,19 @@ from pomo_helpers import statistics, deadline_conversion, current_date_diff
 
 app = Flask(__name__)
 
-# Configure session to use filesystem (instead of signed cookies)
-# really not sure what this does, but just copied from CS50 finance python file
-# looks like there's some more info here https://www.reddit.com/r/cs50/comments/bc4x9t/help_understanding_session_config_with/
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 
+app.config["SECRET_KEY"] = "safdfdsgsssfdhsfgfhherrs"
 # dictionary used to store the table id that user wants to use.
+# will need to move data from sqlite table to cookie to this session object
 session = {}
 
 
 @app.route("/", methods=["GET", "POST"])
 def load():
+    res = make_response(redirect("/home"))
+
+    # I guess need to set an else: here that will load table, if cookies with info already exist
+
     if request.method == "POST":
 
         # opens the app's database and converts to usable dictionary
@@ -52,7 +52,56 @@ def load():
                 session["start_date"] = saved_tables[0]["start_date"]
                 session["tomato_rate"] = saved_tables[0]["tomato_rate"]
 
-                # converts the time_frame string into individual years, months and days elements
+                if "table_id" not in request.cookies:
+                    res.set_cookie("table_id", str(saved_tables[0]["id"]))
+                elif (
+                    "table_id" in request.cookies
+                    and request.cookies.get("table_id") != session["table_id"]
+                ):
+                    res.set_cookie("table_id", str(saved_tables[0]["id"]))
+                if "table_name" not in request.cookies:
+                    res.set_cookie("table_name", str(saved_tables[0]["table_name"]))
+                elif (
+                    "table_name" in request.cookies
+                    and request.cookies.get("table_name") != session["table_name"]
+                ):
+                    res.set_cookie("table_name", str(saved_tables[0]["table_name"]))
+                if "purpose" not in request.cookies:
+                    res.set_cookie("purpose", str(saved_tables[0]["purpose"]))
+                elif (
+                    "purpose" in request.cookies
+                    and request.cookies.get("purpose") != session["purpose"]
+                ):
+                    res.set_cookie("purpose", str(saved_tables[0]["purpose"]))
+                if "hours_goal" not in request.cookies:
+                    res.set_cookie("hours_goal", str(saved_tables[0]["hours_goal"]))
+                elif (
+                    "hours_goal" in request.cookies
+                    and request.cookies.get("hours_goal") != session["hours_goal"]
+                ):
+                    res.set_cookie("hours_goal", str(saved_tables[0]["hours_goal"]))
+                if "time_frame" not in request.cookies:
+                    res.set_cookie("time_frame", str(saved_tables[0]["time_frame"]))
+                elif (
+                    "time_frame" in request.cookies
+                    and request.cookies.get("time_frame") != session["time_frame"]
+                ):
+                    res.set_cookie("time_frame", str(saved_tables[0]["time_frame"]))
+                if "start_date" not in request.cookies:
+                    res.set_cookie("start_date", str(saved_tables[0]["start_date"]))
+                elif (
+                    "start_date" in request.cookies
+                    and request.cookies.get("start_date") != session["start_date"]
+                ):
+                    res.set_cookie("start_date", str(saved_tables[0]["start_date"]))
+                if "tomato_rate" not in request.cookies:
+                    res.set_cookie("tomato_rate", str(saved_tables[0]["tomato_rate"]))
+                elif (
+                    "tomato_rate" in request.cookies
+                    and request.cookies.get("tomato_rate") != session["tomato_rate"]
+                ):
+                    res.set_cookie("tomato_rate", str(saved_tables[0]["tomato_rate"]))
+
                 session["days_until_deadline"] = deadline_conversion(
                     session["time_frame"], session["start_date"]
                 )
@@ -74,7 +123,7 @@ def load():
 
                 # DEBUG-CODE: return render_template("test.html", session=session, saved_tables=saved_tables)
 
-                return redirect("/home")
+                return res
 
         # if user wants to create a new table
         if request.form.get("create"):
@@ -157,6 +206,26 @@ def load():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+
+    # check for cookies
+    if (
+        "table_id" in request.cookies
+        and "table_name" in request.cookies
+        and "purpose" in request.cookies
+        and "hours_goal" in request.cookies
+        and "time_frame" in request.cookies
+        and "start_date" in request.cookies
+        and "tomato_rate" in request.cookies
+    ):
+        session["table_id"] = request.cookies.get("table_id")
+        session["table_name"] = request.cookies.get("table_name")
+        session["purpose"] = request.cookies.get("purpose")
+        session["hours_goal"] = int(request.cookies.get("hours_goal"))
+        session["time_frame"] = request.cookies.get("time_frame")
+        session["start_date"] = request.cookies.get("start_date")
+        session["tomato_rate"] = int(request.cookies.get("tomato_rate"))
+    else:
+        return redirect("/")
 
     if request.method == "POST":
         db = SQL("sqlite:///pomodoro.db")
@@ -358,48 +427,49 @@ def howtouse():
     return render_template("howtouse.html")
 
 
-@app.route("/journal", methods=["GET", "POST"])
-def journal():
-    db = SQL("sqlite:///pomodoro.db")
-    if request.method == "POST":
-        date = datetime.today()
-        date_date = date.strftime("%b %d, %Y")
-        date_time = date.strftime("%I:%M%p")
+# removing journal for v1.3.0 and probably onward, will work to add some sort of chart or graphic history in the near future
+# @app.route("/journal", methods=["GET", "POST"])
+# def journal():
+#     db = SQL("sqlite:///pomodoro.db")
+#     if request.method == "POST":
+#         date = datetime.today()
+#         date_date = date.strftime("%b %d, %Y")
+#         date_time = date.strftime("%I:%M%p")
 
-        # checks to see if there's already a journal entry for current date
-        previous_entries = db.execute(
-            "SELECT date FROM journal WHERE date=:date AND table_id=:table_id",
-            date=date_date,
-            table_id=session["table_id"],
-        )
-        if len(previous_entries) == 1 or len(previous_entries) > 1:
-            session["journal_same_date"] = False
-        else:
-            session["journal_same_date"] = True
+#         # checks to see if there's already a journal entry for current date
+#         previous_entries = db.execute(
+#             "SELECT date FROM journal WHERE date=:date AND table_id=:table_id",
+#             date=date_date,
+#             table_id=session["table_id"],
+#         )
+#         if len(previous_entries) == 1 or len(previous_entries) > 1:
+#             session["journal_same_date"] = False
+#         else:
+#             session["journal_same_date"] = True
 
-        if session["journal_same_date"] == True:
-            db.execute(
-                "INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, ?, ?)",
-                session["table_id"],
-                request.form.get("entry"),
-                date_date,
-                date_time,
-            )
-        else:
-            db.execute(
-                "INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, '', ?)",
-                session["table_id"],
-                request.form.get("entry"),
-                date_time,
-            )
+#         if session["journal_same_date"] == True:
+#             db.execute(
+#                 "INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, ?, ?)",
+#                 session["table_id"],
+#                 request.form.get("entry"),
+#                 date_date,
+#                 date_time,
+#             )
+#         else:
+#             db.execute(
+#                 "INSERT INTO journal (table_id, entry, date, time) VALUES (?, ?, '', ?)",
+#                 session["table_id"],
+#                 request.form.get("entry"),
+#                 date_time,
+#             )
 
-        return redirect("/journal")
-    else:
-        journal_data = db.execute(
-            "SELECT * FROM journal WHERE table_id=:table_id ORDER BY datetime DESC, time_exact ASC",
-            table_id=session["table_id"],
-        )
-        return render_template(
-            "journal.html", session=session, journal_data=journal_data
-        )
+#         return redirect("/journal")
+#     else:
+#         journal_data = db.execute(
+#             "SELECT * FROM journal WHERE table_id=:table_id ORDER BY datetime DESC, time_exact ASC",
+#             table_id=session["table_id"],
+#         )
+#         return render_template(
+#             "journal.html", session=session, journal_data=journal_data
+#         )
 
