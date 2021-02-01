@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, request, abort, flash, make_
 
 from tempfile import mkdtemp
 
+from cryptography.fernet import Fernet
+
 from cs50 import SQL
 from datetime import date, datetime, timedelta
 import csv
@@ -9,11 +11,45 @@ from pomo_helpers import statistics, deadline_conversion, current_date_diff
 
 app = Flask(__name__)
 
-
 app.config["SECRET_KEY"] = "safdfdsgsssfdhsfgfhherrs"
 # dictionary used to store the table id that user wants to use.
 # will need to move data from sqlite table to cookie to this session object
 session = {}
+global new_table
+new_table = False
+
+# def generate_key():
+#     key = Fernet.generate_key()
+#     with open("secret.key", "wb") as key_file:
+#         key_file.write(key)
+
+
+# generate_key()
+
+
+def load_key():
+    return open("secret.key", "rb").read()
+
+
+def encrypt_message(message):
+    key = load_key()
+    encoded_message = message.encode()
+    f = Fernet(key)
+    encrypted_message = f.encrypt(encoded_message)
+    return encrypted_message
+
+
+def decrypt_message(encrypted_message):
+    # encrypted_message = bytes(encrypted_message, "utf-8")
+    key = load_key()
+    f = Fernet(key)
+    edited_message = ""
+    for i in range(0, len(encrypted_message)):
+        if i != 0:
+            edited_message = edited_message + encrypted_message[i]
+
+    key_test = bytes(edited_message, "ascii",)
+    return f.decrypt(key_test)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -44,7 +80,7 @@ def load():
                 return render_template("load.html")
 
             else:
-                session["table_id"] = saved_tables[0]["id"]
+                session["table_id"] = str(encrypt_message(str(saved_tables[0]["id"])))
                 session["table_name"] = saved_tables[0]["table_name"]
                 session["purpose"] = saved_tables[0]["purpose"]
                 session["hours_goal"] = saved_tables[0]["hours_goal"]
@@ -53,12 +89,16 @@ def load():
                 session["tomato_rate"] = saved_tables[0]["tomato_rate"]
 
                 if "table_id" not in request.cookies:
-                    res.set_cookie("table_id", str(saved_tables[0]["id"]))
+                    res.set_cookie(
+                        "table_id", str(encrypt_message(str(saved_tables[0]["id"])))
+                    )
                 elif (
                     "table_id" in request.cookies
                     and request.cookies.get("table_id") != session["table_id"]
                 ):
-                    res.set_cookie("table_id", str(saved_tables[0]["id"]))
+                    res.set_cookie(
+                        "table_id", str(encrypt_message(str(saved_tables[0]["id"])))
+                    )
                 if "table_name" not in request.cookies:
                     res.set_cookie("table_name", str(saved_tables[0]["table_name"]))
                 elif (
@@ -155,6 +195,9 @@ def load():
                     request.form.get("tomato_setting"),
                 )
 
+                global new_table
+                new_table = True
+
                 # pull up newly created table's ID and save to session list
                 saved_tables = db.execute(
                     "SELECT * FROM tables WHERE table_name=:table_name",
@@ -206,26 +249,30 @@ def load():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+    global new_table
+    if new_table == False:
+        # check for cookies
+        if (
+            "table_id" in request.cookies
+            and "table_name" in request.cookies
+            and "purpose" in request.cookies
+            and "hours_goal" in request.cookies
+            and "time_frame" in request.cookies
+            and "start_date" in request.cookies
+            and "tomato_rate" in request.cookies
+        ):
 
-    # check for cookies
-    if (
-        "table_id" in request.cookies
-        and "table_name" in request.cookies
-        and "purpose" in request.cookies
-        and "hours_goal" in request.cookies
-        and "time_frame" in request.cookies
-        and "start_date" in request.cookies
-        and "tomato_rate" in request.cookies
-    ):
-        session["table_id"] = request.cookies.get("table_id")
-        session["table_name"] = request.cookies.get("table_name")
-        session["purpose"] = request.cookies.get("purpose")
-        session["hours_goal"] = int(request.cookies.get("hours_goal"))
-        session["time_frame"] = request.cookies.get("time_frame")
-        session["start_date"] = request.cookies.get("start_date")
-        session["tomato_rate"] = int(request.cookies.get("tomato_rate"))
-    else:
-        return redirect("/")
+            session["table_id"] = int(decrypt_message(request.cookies.get("table_id")))
+            session["table_name"] = request.cookies.get("table_name")
+            session["purpose"] = request.cookies.get("purpose")
+            session["hours_goal"] = int(request.cookies.get("hours_goal"))
+            session["time_frame"] = request.cookies.get("time_frame")
+            session["start_date"] = request.cookies.get("start_date")
+            session["tomato_rate"] = int(request.cookies.get("tomato_rate"))
+        else:
+            return redirect("/")
+
+    new_table = False
 
     if request.method == "POST":
         db = SQL("sqlite:///pomodoro.db")
@@ -416,6 +463,10 @@ def firstentry():
             request.form.get("task"),
             request.form.get("notes"),
         )
+
+        global new_table
+        new_table = True
+
         return redirect("/home")
 
     else:
