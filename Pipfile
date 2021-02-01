@@ -9,6 +9,7 @@ verify_ssl = true
 cs50 = "*"
 flask = "*"
 flask-session = "*"
+cryptography = "*"
 
 [requires]
 python_version = "3.8"
