@@ -4,6 +4,7 @@ THINGS TO FIX:
 -textarea input in /journal, enter doesn't submmit and empty spaces are erased after submitting
 
 POSSIBLE version x.x FEATURES:
+-if you make a new table, add new entry and then reload with previous cookies in place the new table will be overwritten by the cookies
 -add way for users to download their tables
 -timer?
 -have results load up to 10 weeks and then have a link to show more

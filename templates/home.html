@@ -3,7 +3,7 @@ session['table_name'] }}{% endblock %}
 {% block main %}
 <div id="home-header">
     <div class="navlinks">
-      <a href="/">logout</a> <span class="dark-gray-font">
+      <a href="/">logout</a> <span class="dark-gray-font"> | <a href="/graph">graph (beta)</a> <span class="dark-gray-font"></span>
     </div>
   </div>
   <h2><q>{{ session['table_name'] }}</q></h2>
@@ -176,7 +176,7 @@ session['table_name'] }}{% endblock %}
     document.querySelector(".date-displayed-insert").value = entryDateDisplayed;
   </script>
   <footer id="footer" class="home dark-gray-font">
-    version 1.2 2020 &nbsp;
+    v1.3.0 2020 - 2021 &nbsp;
     <a href="mailto:mwroberts89@gmail.com"
       ><i class="far fa-envelope fa-2x"></i
     ></a>
