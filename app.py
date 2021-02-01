@@ -261,7 +261,6 @@ def home():
             and "start_date" in request.cookies
             and "tomato_rate" in request.cookies
         ):
-
             session["table_id"] = int(decrypt_message(request.cookies.get("table_id")))
             session["table_name"] = request.cookies.get("table_name")
             session["purpose"] = request.cookies.get("purpose")
@@ -269,6 +268,9 @@ def home():
             session["time_frame"] = request.cookies.get("time_frame")
             session["start_date"] = request.cookies.get("start_date")
             session["tomato_rate"] = int(request.cookies.get("tomato_rate"))
+            session["current_days_until_deadline"] = current_date_diff(
+                session["time_frame"]
+            )
         else:
             return redirect("/")
 
