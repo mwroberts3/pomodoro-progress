@@ -11,6 +11,7 @@ from pomo_helpers import statistics, deadline_conversion, current_date_diff
 
 from matplotlib.pyplot import figure
 import mpld3
+import os
 
 app = Flask(__name__)
 
@@ -491,23 +492,29 @@ def graph():
     db = SQL("sqlite:///pomodoro.db")
     user_daily_history = db.execute(
         "SELECT * FROM daily_history WHERE table_id=:table_id",
-        table_id=session["table_id"],
+        table_id=int(decrypt_message(request.cookies.get("table_id"))),
     )
 
     for row in user_daily_history:
         total_tomatoes_count += row["tomato_count"]
-        # print(total_tomatoes_count)
         total_tomatoes.append(total_tomatoes_count)
-        # print(total_tomatoes)
-
-    print(total_tomatoes)
 
     fig = figure()
     ax = fig.gca()
     ax.plot(total_tomatoes)
 
-    mpld3.show(fig)
-    # return redirect("/home")
+    # if os.path.exists("./templates/myfig.html"):
+    #     os.remove("./templates/myfig.html")
+
+    mpld3.save_html(
+        fig,
+        "./templates/myfig{}.html".format(
+            decrypt_message(request.cookies.get("table_id"))
+        ),
+    )
+    return render_template(
+        "myfig{}.html".format(decrypt_message(request.cookies.get("table_id")))
+    )
 
 
 # removing journal for v1.3.0 and probably onward, will work to add some sort of chart or graphic history in the near future

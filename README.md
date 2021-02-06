@@ -8,13 +8,13 @@ Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! 
 
 ## Current Version Information
 
-**Version:** 1.2<br>
+**Version:** 1.3.0<br>
 **Creator:** mwroberts3<br>
-**Backend:** Flask<br>
+**Server-Side:** Flask<br>
 **Database:** Sqlite, exists as a sole .db file<br>
 **Host:** http://pomoprogress.pythonanywhere.com/<br>
 **Web Launch Date:** July 5, 2020<br>
-**Current Version Launch Date:** August 7, 2020<br>
+**Current Version Launch Date:** February 1, 2021<br>
 
 ## Usage
 
@@ -34,8 +34,8 @@ Compared to other versions of Pomodoro trackers on the internet, Pomo Progress! 
       1. since there is no built-in timer, users can time themselves by any external means, such as the <a href="https://www.google.com/search?q=timer&oq=timer&aqs=chrome.0.69i59j0l5j69i61j69i60.995j0j7&sourceid=chrome&ie=UTF-8">Google timer</a>
    4. basic information about the table is shown in the left-hand column and more detailed stats are shown in the right-hand column.
 3. ### More features
-   1. users can user the journal feature to add long-form thoughts and ideas about their journey
-   2. more functions to be added in future versions
+   1. users can view a graph of their overall progress since inception of table (beta)
+   2. more features to be added in future versions
 
 ## Support
 
@@ -44,6 +44,14 @@ If your a user with questions or a fellow github user with tech questions, pleas
 **email:** mwroberts89@gmail.com
 
 ## Version History
+
+#### Version 1.3 - February 1, 2021
+
+- added cookies for smoother use between multiple users. Table IDs are encrypted so other user's cannot be edited by anyone
+
+**Graph** - added a basic graph feature, which I intead to bolster in future versions that shows a chart of total progress
+
+**Journal** - removed the journal feature, as I never used it myself and seemed redundant with the notes functionality
 
 #### Version 1.2 - August 7, 2020
 
